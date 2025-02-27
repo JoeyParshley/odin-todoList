@@ -1,0 +1,37 @@
+# Set up Webpack
+
+- Follow steps [here](https://www.theodinproject.com/lessons/node-path-javascript-restaurant-page)
+  - This uses [this](https://www.theodinproject.com/lessons/javascript-webpack)
+  - Follow that tutorial using this current project as a guide
+- Play with factory functions to create projects (todoItems)
+
+# Notes
+
+```js
+function createTodoItem(title, description, dueDate, priority, notes, isComplete) {
+  return {
+    name: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    notes: notes,
+    isComplete, isComplete,
+    greet: function () {
+      return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+    },
+  };
+}
+
+const todo1 = createTodoItem(...);
+console.log(todo1); // Output: Hello, my name is Alice and I am 30 years old.
+```
+
+Projects are lists of todos. Kinda like categories. Default project shows all todos.
+Users can
+
+- create projects
+- add todos to projects
+- create todos
+- set todo properties
+- set todos as complete
+- change todo priority

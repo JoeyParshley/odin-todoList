@@ -14,9 +14,9 @@ Todo List project from Node Path of theodinproject
    3. Expand a single todo to see its details.
    4. Delete a todo.
 6. Check out the following for inspiration:
-   1. [Todoist](https://en.todoist.com/)
-   2. [Things](https://culturedcode.com/things/)
-   3. [any.do](https://www.any.do/)
+   1. <a href="https://en.todoist.com/" target="_blank">Todoist</a>
+   2. <a href="https://culturedcode.com/things/" target="_blank">Things</a>
+   3. <a href="https://www.any.do/" target="_blank">any.do</a>
 7. Since using webpack, consider using the following library(s)
    1. [date-fns](https://github.com/date-fns/date-fns) for formatting dates and times.
 8. Add some peristance to the TODO app useing the Web Storage API
