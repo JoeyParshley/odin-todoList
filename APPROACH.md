@@ -35,3 +35,13 @@ Users can
 - set todo properties
 - set todos as complete
 - change todo priority
+
+# Inspiration
+
+- https://app.any.do/myday
+- https://culturedcode.com/things/support/articles/2803581/#ihqkf
+- https://app.todoist.com/app/today
+
+# Deployment
+
+Follow the steps in the `Deployment` secion on this page [here](https://www.theodinproject.com/lessons/node-path-javascript-restaurant-page)
