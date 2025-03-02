@@ -1,7 +1,7 @@
 export class Project {
-  constructor(name, todos) {
+  constructor(name, todos = []) {
     this.name = name;
-    this.todos = [];
+    this.todos = todos;
   }
 
   getName() {
@@ -26,5 +26,10 @@ export class Project {
 
   deleteTodoByName(name) {
     this.todos = this.todos.filter((todo) => todo.title !== name);
+  }
+
+  moveTodoToProject(todoToMove, newProject) {
+    this.todos = this.todos.filter((todo) => todo.title !== todoToMove.title);
+    newProject.todos.push(todoToMove);
   }
 }
