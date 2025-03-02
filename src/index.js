@@ -38,3 +38,49 @@ const todo4 = new Todo(
   "Here is a note regarding about the fourth todo.",
   ["tag1"]
 );
+
+document
+  .getElementById("add-single-item-to-ls")
+  .addEventListener("click", (e) => {
+    localStorage.setItem("name", "Joey Parshley");
+    updateUI();
+  });
+
+document
+  .getElementById("add-another-item-to-ls")
+  .addEventListener("click", (e) => {
+    localStorage.setItem(
+      "users",
+      JSON.stringify({ name: "Andrea Parshley", food: "pizza" })
+    );
+    updateUI();
+  });
+
+document
+  .getElementById("get-single-item-from-ls")
+  .addEventListener("click", (e) => {
+    const user = JSON.parse(localStorage.getItem("users"));
+    document.getElementById("ls-currently").textContent = user.name;
+  });
+document
+  .getElementById("remove-single-item-from-ls")
+  .addEventListener("click", (e) => {
+    localStorage.removeItem("name");
+    updateUI();
+  });
+document.getElementById("remove-all-from-ls").addEventListener("click", (e) => {
+  localStorage.clear();
+  updateUI();
+});
+
+function updateUI() {
+  let values = [];
+  let keys = Object.keys(localStorage);
+  let i = keys.length;
+
+  while (i--) {
+    values.push(localStorage.getItem([keys[i]]));
+  }
+
+  document.getElementById("ls-currently").textContent = values;
+}
