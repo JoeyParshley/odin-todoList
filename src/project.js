@@ -4,6 +4,22 @@ export class Project {
     this.todos = [];
   }
 
+  getName() {
+    return this.name;
+  }
+
+  getTodos() {
+    return this.todos;
+  }
+
+  setName(name) {
+    this.name = name;
+  }
+
+  setTodos(newTodos) {
+    this.todos = [...newTodos];
+  }
+
   addTodo(todo) {
     this.todos.push(todo);
   }

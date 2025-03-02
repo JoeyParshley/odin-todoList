@@ -8,6 +8,54 @@ export class Todo {
     this.isComplete = false;
   }
 
+  getTitle() {
+    return this.title;
+  }
+
+  getDescription() {
+    return this.description;
+  }
+
+  getDueDate() {
+    return this.dueDate;
+  }
+
+  getPriority() {
+    return this.priority;
+  }
+
+  getNotes() {
+    return this.notes;
+  }
+
+  getIsComplete() {
+    return this.isComplete;
+  }
+
+  setTitle(title) {
+    this.title = title;
+  }
+
+  setDescription(description) {
+    this.description = description;
+  }
+
+  setDueDate(dueDate) {
+    this.dueDate = dueDate;
+  }
+
+  setPriority(priority) {
+    this.priority = priority;
+  }
+
+  setNotes(notes) {
+    this.notes = notes;
+  }
+
+  setIsComplete(isComplete) {
+    this.isComplete = isComplete;
+  }
+
   toggleComplete() {
     this.isComplete = !this.isComplete;
   }

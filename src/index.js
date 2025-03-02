@@ -20,11 +20,20 @@ const todo2 = new Todo(
   false
 );
 
-const project1 = new Project("project1");
-project1.addTodo(todo1);
-project1.addTodo(todo2);
-console.log("project1", project1);
+const todo3 = new Todo(
+  "Todo 3",
+  "This is the third todo",
+  new Date("July, 4, 2025"),
+  "Medium",
+  "Here is a note regarding the third todo.",
+  false
+);
 
-project1.deleteTodoByName("Todo 2");
-
-console.log("project1 after deletion", project1);
+const todo4 = new Todo(
+  "Todo 4",
+  "This is the fourth todo",
+  new Date("October 28, 2025"),
+  "Medium",
+  "Here is a note regarding about the fourth todo.",
+  false
+);
