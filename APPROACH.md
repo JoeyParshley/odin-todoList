@@ -7,6 +7,41 @@
 
 # Notes
 
+## Project Fields
+
+- title
+- description
+- priority
+- Notes
+- when - date (someday)
+- Deadline Date
+- Is complete
+- tags
+- Todo list
+
+## Todo Fields
+
+- title
+- priority
+- description
+- notes
+- due date
+- deadline
+- tags
+- when - date (someday)
+- check list
+- is complete
+- which project or list ist belongs to
+
+## When object
+
+- When text
+
+## Tag
+
+- Tagname
+- TagColor
+
 ```js
 function createTodoItem(title, description, dueDate, priority, notes, isComplete) {
   return {
