@@ -1,11 +1,16 @@
+import { tagManager } from "./tagManager.js";
+
 export class Todo {
-  constructor(title, description, dueDate, priority, notes, isComplete) {
+  constructor(title, description, dueDate, priority, notes, tags = []) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
     this.isComplete = false;
+    this.tags = [];
+    this.checklist = [];
+    tags.forEach((tag) => this.addTag(tag));
   }
 
   getTitle() {
@@ -58,5 +63,22 @@ export class Todo {
 
   toggleComplete() {
     this.isComplete = !this.isComplete;
+  }
+
+  addTag(tag) {
+    if (!this.tags.includes(tag)) {
+      this.tags.push(tag);
+      tagManager.addTag(tag);
+    }
+  }
+
+  addCheckListItem(item) {
+    this.checklist.push({ item, completed: false });
+  }
+
+  toggleChecklistItem(index) {
+    if (this.checklist[index]) {
+      this.checklist[index].completed = !this.checklist[index].completed;
+    }
   }
 }
