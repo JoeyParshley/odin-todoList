@@ -81,4 +81,8 @@ export class Todo {
       this.checklist[index].completed = !this.checklist[index].completed;
     }
   }
+
+  save() {
+    localStorage.setItem(this.title, JSON.stringify(this));
+  }
 }

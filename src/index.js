@@ -2,6 +2,7 @@ import "./styles/style.css";
 import { Todo } from "./todo.js";
 import { Project } from "./project.js";
 import { TagManager } from "./tagManager.js";
+import { Storage } from "./storage.js";
 
 const todo1 = new Todo(
   "Todo 1",
@@ -38,3 +39,14 @@ const todo4 = new Todo(
   "Here is a note regarding about the fourth todo.",
   ["tag1"]
 );
+
+const allTodos = new Project("All Todos", [todo1, todo2, todo3, todo4]);
+
+Storage.saveTodo(todo1);
+Storage.saveTodo(todo2);
+Storage.saveTodo(todo3);
+Storage.saveTodo(todo4);
+Storage.saveProject(allTodos);
+
+Storage.deleteTodo(todo3);
+Storage.deleteProject(allTodos);
