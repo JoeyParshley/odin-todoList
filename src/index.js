@@ -4,49 +4,20 @@ import { Project } from "./project.js";
 import { TagManager } from "./tagManager.js";
 import { Storage } from "./storage.js";
 
-const todo1 = new Todo(
-  "Todo 1",
-  "This is todo one.",
-  new Date("April 9, 2025"),
-  "High",
-  "This is a note about todo one.",
-  ["tag1"]
-);
+// const projectsJSON = JSON.stringify(projects);
+// Storage.saveProjects(projectsJSON);
 
-const todo2 = new Todo(
-  "Todo 2",
-  "This is the second todo",
-  new Date("April, 20, 2025"),
-  "Medium",
-  "Here is a note regarding Todo number 2.",
-  ["tag1"]
-);
+const allProjects = JSON.parse(Storage.getProjects());
 
-const todo3 = new Todo(
-  "Todo 3",
-  "This is the third todo",
-  new Date("July, 4, 2025"),
-  "Medium",
-  "Here is a note regarding the third todo.",
-  ["tag1"]
-);
-
-const todo4 = new Todo(
-  "Todo 4",
-  "This is the fourth todo",
-  new Date("October 28, 2025"),
-  "Medium",
-  "Here is a note regarding about the fourth todo.",
-  ["tag1"]
-);
-
-const allTodos = new Project("All Todos", [todo1, todo2, todo3, todo4]);
-
-Storage.saveTodo(todo1);
-Storage.saveTodo(todo2);
-Storage.saveTodo(todo3);
-Storage.saveTodo(todo4);
-Storage.saveProject(allTodos);
-
-Storage.deleteTodo(todo3);
-Storage.deleteProject(allTodos);
+// populate project list in the ui
+allProjects.forEach((project) => {
+    const projectList = document.querySelector(".project-list");
+    // create a new li element
+    const projectListLi = document.createElement("li");
+    // create a new a element
+    const projectListLink = document.createElement("a");
+    projectListLink.href = "#";
+    projectListLink.textContent = project.projectName;
+    projectListLi.appendChild(projectListLink);
+    projectList.appendChild(projectListLi);
+});
