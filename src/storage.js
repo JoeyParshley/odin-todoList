@@ -23,4 +23,12 @@ export class Storage {
         const projectsJSON = localStorage.getItem("projects");
         return projectsJSON ? JSON.parse(projectsJSON) : [];
     }
+
+    static getProjectById(id) {
+        const projects = Storage.getProjects();
+        const parsedProjects = JSON.parse(projects);
+        return parsedProjects.find((project) => {
+            return project.id === parseInt(id, 10);
+        });
+    }
 }

@@ -80,6 +80,7 @@ a {
             .todo {
                 row-gap: 15px;
                 background: white;
+                min-width: 240px;
                 height: 600px;
                 border-radius: 10px;
                 box-shadow: -10px 0px 1px rebeccapurple,
@@ -225,7 +226,7 @@ a {
     color: white;
     padding: 20px;
     display: grid;
-    grid-template-rows: 50px 150px 200px auto;
+    grid-template-rows: 50px 150px 300px auto;
     grid-column: 1;
     grid-row: 1 / 5;
     background: rebeccapurple;
@@ -246,6 +247,10 @@ a {
 
         font-weight: 600;
         font-size: 1.2rem;
+        &.tag-list {
+            max-height: 200px;
+            overflow: scroll;
+        }
     }
 
     .menu.side-menu a:has(> svg) {

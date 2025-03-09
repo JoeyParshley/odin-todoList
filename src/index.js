@@ -9,6 +9,18 @@ import { Storage } from "./storage.js";
 
 const allProjects = JSON.parse(Storage.getProjects());
 
+function showProjectDetails(project) {
+    const projectName = document.querySelector(".project-name");
+    const projectDescription = document.querySelector(".project-description");
+}
+
+function handleProjectClick(e) {
+    e.preventDefault();
+    const projectId = e.target.getAttribute("data-project-id");
+    const project = Storage.getProjectById(projectId);
+    console.log("project", project);
+}
+
 /**
  * Builds the project list in the ui
  * @returns {void}
@@ -23,7 +35,9 @@ function buildProjectList() {
         const projectListLi = document.createElement("li");
         // create a new a element
         const projectListLink = document.createElement("a");
+        projectListLink.setAttribute("data-project-id", project.id);
         projectListLink.href = "#";
+        projectListLink.addEventListener("click", handleProjectClick);
         projectListLink.textContent = project.projectName;
         projectListLi.appendChild(projectListLink);
         projectList.appendChild(projectListLi);
