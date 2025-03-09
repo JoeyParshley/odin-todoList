@@ -3,9 +3,19 @@ import { Todo } from "./todo.js";
 import { Project } from "./project.js";
 import { TagManager } from "./tagManager.js";
 import { Storage } from "./storage.js";
+import projects from "./projects.js";
 
-// const projectsJSON = JSON.stringify(projects);
-// Storage.saveProjects(projectsJSON);
+/**
+ * @description This function seeds the local storage with the projects. It converts the projects array to a JSON string and then saves it to the local storage.
+ * @example
+ * seedLocalStorageWithProjects();
+ * @returns {void}
+ *
+ */
+function seedLocalStorageWithProjects() {
+    const projectsJSON = JSON.stringify(projects);
+    Storage.saveProjects(projectsJSON);
+}
 
 const allProjects = JSON.parse(Storage.getProjects());
 
@@ -142,6 +152,10 @@ function buildTagList() {
         tagList.appendChild(tagListLi);
     });
 }
+
+// seed the local storage with the projects
+// this is only when the projects array in projects.js is modified
+//seedLocalStorageWithProjects();
 
 // build the project list
 buildProjectList();

@@ -10,6 +10,7 @@ const projects = [
                 dueDate: "2025-03-10",
                 priority: "High",
                 tags: ["shopping", "urgent"],
+                notes: "Check for discounts on dairy products.",
             },
             {
                 id: 2,
@@ -18,6 +19,7 @@ const projects = [
                 dueDate: "2025-03-12",
                 priority: "Medium",
                 tags: ["chores"],
+                notes: "Focus on the living room and kitchen.",
             },
             {
                 id: 3,
@@ -26,6 +28,7 @@ const projects = [
                 dueDate: "2025-03-15",
                 priority: "Low",
                 tags: ["leisure"],
+                notes: "Read at least one chapter per day.",
             },
         ],
     },
@@ -40,6 +43,7 @@ const projects = [
                 dueDate: "2025-03-09",
                 priority: "High",
                 tags: ["work", "urgent"],
+                notes: "Include the latest sales data.",
             },
             {
                 id: 5,
@@ -48,6 +52,7 @@ const projects = [
                 dueDate: "2025-03-11",
                 priority: "Medium",
                 tags: ["meeting"],
+                notes: "Prepare the presentation slides.",
             },
             {
                 id: 6,
@@ -56,6 +61,7 @@ const projects = [
                 dueDate: "2025-03-13",
                 priority: "Low",
                 tags: ["development"],
+                notes: "Focus on the authentication module.",
             },
         ],
     },
@@ -70,6 +76,7 @@ const projects = [
                 dueDate: "2025-03-08",
                 priority: "High",
                 tags: ["exercise"],
+                notes: "Try to maintain a steady pace.",
             },
             {
                 id: 8,
@@ -78,6 +85,7 @@ const projects = [
                 dueDate: "2025-03-10",
                 priority: "Medium",
                 tags: ["exercise", "wellness"],
+                notes: "Focus on breathing exercises.",
             },
             {
                 id: 9,
@@ -86,6 +94,7 @@ const projects = [
                 dueDate: "2025-03-14",
                 priority: "Low",
                 tags: ["exercise"],
+                notes: "Include both upper and lower body exercises.",
             },
         ],
     },
