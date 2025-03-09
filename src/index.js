@@ -10,15 +10,46 @@ import { Storage } from "./storage.js";
 const allProjects = JSON.parse(Storage.getProjects());
 
 function showProjectDetails(project) {
-    const projectName = document.querySelector(".project-name");
-    const projectDescription = document.querySelector(".project-description");
+    const projectTitleH3 = document.querySelector("#project-title");
+    const projectTitle = project.projectName;
+    const todosWrapper = document.querySelector("#todos-wrapper");
+    const todosH3 = document.createElement("h3");
+    todosH3.textContent = "Todos";
+    // clear the todos wrapper
+    todosWrapper.innerHTML = "";
+    // append the h3 to the todos wrapper
+    todosWrapper.appendChild(todosH3);
+    projectTitleH3.textContent = projectTitle;
+
+    debugger;
+    const projectTodos = project.todos;
+
+    projectTodos.forEach((todo) => {
+        const todoItemDiv = document.createElement("div");
+        todoItemDiv.classList.add("todo-item");
+        const todoCheckbox = document.createElement("div");
+        todoCheckbox.classList.add("checkbox");
+        const todoTitle = document.createElement("div");
+        todoTitle.classList.add("todo-title");
+        todoTitle.textContent = todo.title;
+        todoItemDiv.setAttribute("data-todo-id", todo.id);
+        todoItemDiv.setAttribute("data-todo-description", todo.description);
+        todoItemDiv.setAttribute("data-todo-due-date", todo.dueDate);
+        todoItemDiv.setAttribute("data-todo-priority", todo.priority);
+        todoItemDiv.setAttribute("data-todo-tags", todo.tags.join(", "));
+        todoItemDiv.appendChild(todoCheckbox);
+        todoItemDiv.appendChild(todoTitle);
+
+        // append the div to the todos wrapper
+        todosWrapper.appendChild(todoItemDiv);
+    });
 }
 
 function handleProjectClick(e) {
     e.preventDefault();
     const projectId = e.target.getAttribute("data-project-id");
     const project = Storage.getProjectById(projectId);
-    console.log("project", project);
+    showProjectDetails(project);
 }
 
 /**
