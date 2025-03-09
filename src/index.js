@@ -9,6 +9,15 @@ import { Storage } from "./storage.js";
 
 const allProjects = JSON.parse(Storage.getProjects());
 
+/**
+ *
+ * @param {*} project
+ * @description This function takes a project object and displays the project details in the ui. It also clears the todos wrapper and appends the todos to the todos wrapper.
+ * @example
+ * showProjectDetails(project);
+ * @returns {void}
+ * TODO: refactor this function to use the project id to get the project from the storage and then call the showProjectDetails function to display the project details in the ui.
+ */
 function showProjectDetails(project) {
     const projectTitleH3 = document.querySelector("#project-title");
     const projectTitle = project.projectName;
@@ -21,7 +30,6 @@ function showProjectDetails(project) {
     todosWrapper.appendChild(todosH3);
     projectTitleH3.textContent = projectTitle;
 
-    debugger;
     const projectTodos = project.todos;
 
     projectTodos.forEach((todo) => {
@@ -45,6 +53,14 @@ function showProjectDetails(project) {
     });
 }
 
+/**
+ * @param {*} e
+ * @description This function handles the click event on the project list. It gets the project id from the data-project-id attribute and then gets the project from the storage. It then calls the showProjectDetails function to display the project details in the ui.
+ * @example
+ * handleProjectClick(e);
+ * @returns {void}
+ * TODO: refactor this function to use the project id to get the project from the storage and then call the showProjectDetails function to display the project details in the ui.
+ */
 function handleProjectClick(e) {
     e.preventDefault();
     const projectId = e.target.getAttribute("data-project-id");
@@ -58,6 +74,8 @@ function handleProjectClick(e) {
  * @description This function loops through the projects and creates a new li element for each project. It then appends the li element to the project list.
  * @example
  * buildProjectList();
+ * @returns {void}
+ *
  */
 function buildProjectList() {
     allProjects.forEach((project) => {
@@ -96,6 +114,13 @@ function getAllTagsFromProjects() {
     return allTags;
 }
 
+/**
+ * Builds the tag list in the ui
+ * @returns {void}
+ * @description This function loops through the tags and creates a new li element for each tag. It then appends the li element to the tag list.
+ * @example
+ * buildTagList();
+ */
 function buildTagList() {
     const allTags = getAllTagsFromProjects();
     const tagList = document.querySelector(".tag-list");
@@ -111,4 +136,5 @@ function buildTagList() {
 
 // build the project list
 buildProjectList();
+// build the tag list
 buildTagList();
