@@ -63,9 +63,18 @@ function showProjectDetails(project) {
  */
 function handleProjectClick(e) {
     e.preventDefault();
-    const projectId = e.target.getAttribute("data-project-id");
-    const project = Storage.getProjectById(projectId);
-    showProjectDetails(project);
+    const target = e.target;
+    if (target.tagName === "A") {
+        const projectId = target.getAttribute("data-project-id");
+        // remove the active class from all the projects
+        document.querySelectorAll(".project-list li a").forEach((a) => {
+            a.classList.remove("active");
+        });
+        // add the active class to the clicked project
+        target.classList.add("active");
+        const project = Storage.getProjectById(projectId);
+        showProjectDetails(project);
+    }
 }
 
 /**
@@ -86,7 +95,7 @@ function buildProjectList() {
         const projectListLink = document.createElement("a");
         projectListLink.setAttribute("data-project-id", project.id);
         projectListLink.href = "#";
-        projectListLink.addEventListener("click", handleProjectClick);
+        projectList.addEventListener("click", handleProjectClick);
         projectListLink.textContent = project.projectName;
         projectListLi.appendChild(projectListLink);
         projectList.appendChild(projectListLi);
