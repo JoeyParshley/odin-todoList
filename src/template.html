@@ -96,40 +96,37 @@
                 <div class="todos">
                     <div id="todos-wrapper" class="todo main">
                         <h3>Todos</h3>
-                        <!-- <div class="todo-item">
-                            <div class="checkbox"></div>
-                            <div class="todo-title">Clean the house</div>
-                        </div>
-                        <div class="todo-item selected">
-                            <div class="checkbox"></div>
-                            <div class="todo-title">Walk the dog</div>
-                        </div>
-                        <div class="todo-item">
-                            <div class="checkbox"></div>
-                            <div class="todo-title">Go to the gym</div>
-                        </div> -->
                     </div>
-                    <div class="todo details">
-                        <h3>Details</h3>
-                        <form id="todo-form">
-                            <label for="title">Title:</label>
-                            <input type="text" id="title" name="title" required><br>
-                            <label for="description">Description:</label>
-                            <textarea id="description" name="description" required></textarea><br>
-                            <label for="dueDate">Due Date:</label>
-                            <input type="date" id="dueDate" name="dueDate" required><br>
-                            <label for="priority">Priority:</label>
-                            <select id="priority" name="priority" required>
-                                <option value="low">Low</option>
-                                <option value="medium">Medium</option>
-                                <option value="high">High</option>
-                            </select><br>
-                            <label for="notes">Notes:</label>
-                            <textarea id="notes" name="notes"></textarea><br>
-                            <label for="tags">Tags:</label>
-                            <input type="text" id="tags" name="tags" placeholder="Comma separated"><br>
-                            <button type="submit">Save</button>
-                        </form>
+                    <div id="todo-details" class="todo details">
+                        <div class="breadcrumbs">
+                            <span id="breadcrumbs">My Projects > Personal</span>
+                        </div>
+                        <div class="details-wrapper">
+                            <div class="details title description">
+                                <div class="checkbox"></div>
+                                <div><h3>Buy groceries</h3></div>
+                                <p class="detail-description">Milk, Bread, Eggs, Butter</p>
+                            </div>
+                            <div class="details dueDate priority tags">
+                                <div class="details dueDate">
+                                    <h4>Due Date:</h4>
+                                    <p id="detail-dueDate">2025-04-09</p>
+                                </div>
+                                <div class="details priority">
+                                    <h4>Priority</h4>
+                                    <p id="detail-priority"> High</p>
+                                </div>
+                                <div class="details tags">
+                                    <h4>Tags</h4>
+                                    <div class="detail-tags"><span class="tag">#shopping</span><span class="tag">#urgent</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="details notes">
+                            <h4>Notes:</h4>
+                            <p id="detail-notes">Check for discounts on dairy products.</p>
+                        </div>
+                        <button id="edit-button">Edit</button>
                     </div>
                 </div>
             </div>
