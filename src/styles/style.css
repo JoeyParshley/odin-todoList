@@ -114,8 +114,9 @@ a {
                         color: rebeccapurple;
                         height: 20px;
                         vertical-align: middle;
-                        &.selected {
-                            background-color: rgba(102, 51, 153, 0.25);
+                        border: solid 1px #fff;
+                        &.active {
+                            border-color: rgba(102, 51, 153, 0.25);
                         }
                         &:hover {
                             background-color: rgba(102, 51, 153, 0.1);
