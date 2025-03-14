@@ -101,6 +101,7 @@ export class Todo {
  * @param {string}          projectName      The name of the project the todo item belongs to.
  */
 export function showTodoDetails(todo, projectName) {
+    const todoDetails = document.querySelector("#todo-details");
     const breadcrumbsElement = document.querySelector("#breadcrumbs");
     const todoNameH3 = document.querySelector("#detail-name");
     const todoDescriptionP = document.querySelector("#detail-description");
@@ -127,6 +128,7 @@ export function showTodoDetails(todo, projectName) {
         span.textContent = `#${tag}`;
         todoTagsWrapper.appendChild(span);
     });
+    todoDetails.classList.remove("inactive");
 }
 
 /**
@@ -136,8 +138,8 @@ export function showTodoDetails(todo, projectName) {
  * @param {Event} e - The event object from the click event.
  */
 export function buildTodoDetailsDom(e) {
-    e.preventDefault();
     const target = e.target;
+    e.preventDefault();
     if (target.tagName === "A") {
         const todoId = target.getAttribute("data-todo-id");
         const projectId = target.getAttribute("data-project-id");
@@ -165,8 +167,8 @@ export function buildTodoDetailsDom(e) {
  * @param {string} project.todos[].title - The title of the todo item.
  */
 export function buildTodoList(project) {
+    const todoList = document.querySelector("#todos-wrapper .todo-list");
     project.todos.forEach((todo) => {
-        const todoList = document.querySelector("#todos-wrapper .todo-list");
         const todoListItem = document.createElement("li");
         const todoListItemLink = document.createElement("a");
         const todoCheckbox = document.createElement("div");

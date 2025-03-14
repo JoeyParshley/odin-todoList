@@ -139,6 +139,7 @@ export function buildTagList() {
  */
 
 export function showProjectDetails(project) {
+    const todoDetails = document.querySelector("#todo-details");
     const projectTitleH3 = document.querySelector("#project-title");
     const projectTitle = project.projectName;
     const todosWrapper = document.querySelector("#todos-wrapper");
@@ -154,6 +155,7 @@ export function showProjectDetails(project) {
     // append the h3 to the todos wrapper
     todosWrapper.appendChild(todosH3);
     todosWrapper.appendChild(todosList);
-
+    if (!todoDetails.classList.contains("inactive"))
+        todoDetails.classList.add("inactive");
     buildTodoList(project);
 }
