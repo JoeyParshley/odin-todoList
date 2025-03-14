@@ -54,13 +54,53 @@ export function buildProjectDetailsDom(e) {
     if (target.tagName === "A") {
         const projectId = target.getAttribute("data-project-id");
         // remove the active class from all the projects
-        document.querySelectorAll(".project-list li a").forEach((a) => {
+        document.querySelectorAll("a.active").forEach((a) => {
             a.classList.remove("active");
         });
         // add the active class to the clicked project
         target.classList.add("active");
         const project = Storage.getProjectById(projectId);
         showProjectDetails(project);
+    }
+}
+
+export function buildProjectsByTag(e) {
+    e.preventDefault();
+    const target = e.target;
+    let taggedProject = {};
+    let taggedTodos = [];
+    let taggedProjects = [];
+    let tag = "";
+    if (e.target.tagName === "A") {
+        // get the projects associated with this tag
+        // map through the projects to get the todos, map though the todos to get the tags
+        allProjects.map((project) => {
+            const todos = project.todos;
+            todos.map((todo) => {
+                const tags = todo.tags;
+                tags.map((currentTag) => {
+                    if (currentTag === e.target.id) {
+                        // we have the project object, the todo object, and the tag
+                        // now build the todolits ui
+                        if (!taggedTodos.includes(todo)) {
+                            tag = currentTag;
+                            taggedProject = structuredClone(project);
+                            taggedProjects.push(taggedProject);
+                            taggedTodos.push(todo);
+                        }
+                    }
+                });
+            });
+            // replace project.todos with taggedTodos.
+        });
+        taggedProject.todos = taggedTodos;
+        showProjectDetails(taggedProject);
+        // populate the ui with the todos from that project using the existing display function
+        // toggle the active classes.
+        document.querySelectorAll("a.active").forEach((a) => {
+            a.classList.remove("active");
+        });
+        target.classList.add("active");
     }
 }
 
@@ -123,8 +163,11 @@ export function buildTagList() {
         const tagListLi = document.createElement("li");
         const tagListLink = document.createElement("a");
         tagListLink.href = "#";
+        tagListLink.setAttribute("id", tag);
+        tagListLink.classList.add("tag-list-item");
         tagListLink.textContent = tag;
         tagListLi.appendChild(tagListLink);
+        tagList.addEventListener("click", buildProjectsByTag);
         tagList.appendChild(tagListLi);
     });
 }
@@ -149,10 +192,10 @@ export function showProjectDetails(project) {
 
     projectTitleH3.textContent = projectTitle;
     todosList.classList.add("todo-list");
-    todosH3.textContent = "Todos";
     // clear the todos wrapper
     todosWrapper.innerHTML = "";
     // append the h3 to the todos wrapper
+    todosH3.textContent = "Todos";
     todosWrapper.appendChild(todosH3);
     todosWrapper.appendChild(todosList);
     if (!todoDetails.classList.contains("inactive"))

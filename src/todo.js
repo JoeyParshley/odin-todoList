@@ -109,7 +109,13 @@ export function showTodoDetails(todo, projectName) {
     const todoPriorityP = document.querySelector("#detail-priority");
     const todoNotesP = document.querySelector("#detail-notes");
     const todoTagsWrapper = document.querySelector("#detail-tags");
+    debugger;
 
+    /**
+     * TODO: when there is more than todo associated with the tag the `todo` is undefined in for the first todo in the todo-list
+     *
+     * Need a way to handle, multiple projects/todos when checking the filtered links so can display all project/todo titles associated with the tag
+     */
     breadcrumbsElement.textContent = `My Projects > ${projectName}`;
     todoNameH3.textContent = "";
     todoNameH3.textContent = todo.title;
@@ -167,7 +173,9 @@ export function buildTodoDetailsDom(e) {
  * @param {string} project.todos[].title - The title of the todo item.
  */
 export function buildTodoList(project) {
+    // debugger;
     const todoList = document.querySelector("#todos-wrapper .todo-list");
+    todoList.innerHTML = "";
     project.todos.forEach((todo) => {
         const todoListItem = document.createElement("li");
         const todoListItemLink = document.createElement("a");
