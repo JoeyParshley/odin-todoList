@@ -1,6 +1,6 @@
 import { allProjects } from ".";
 import { Storage } from "./storage";
-import { buildTodoList, buildTodoDetailsDom } from "./todo";
+import { buildTodoList, hideTodoDetails } from "./todo";
 
 export class Project {
     constructor(name, todos = []) {
@@ -147,63 +147,6 @@ export function buildProjectList() {
     });
 }
 
-const getAllTodos = () => {
-    const projectTitle = document.querySelector("#project-title");
-    const todoList = document.querySelector("#todos-wrapper .todo-list");
-    todoList.innerHTML = "";
-    projectTitle.textContent = "";
-    projectTitle.textContent = "All my todos";
-    allProjects.map((project) => {
-        project.todos.map((todo) => {
-            const todoListItem = document.createElement("li");
-            const todoListItemLink = document.createElement("a");
-            const todoCheckbox = document.createElement("div");
-            todoCheckbox.classList.add("checkbox");
-            todoListItemLink.href = "#";
-            todoListItemLink.classList.add("todo-title");
-            todoListItemLink.setAttribute("data-todo-id", todo.id);
-            todoListItemLink.setAttribute("data-project-id", project.id);
-            todoListItemLink.textContent = todo.title;
-            todoListItemLink.addEventListener("click", (e) =>
-                buildTodoDetailsDom(e, project)
-            );
-            todoListItem.classList.add("todo-item");
-            todoListItem.appendChild(todoCheckbox);
-            todoListItem.appendChild(todoListItemLink);
-            todoList.appendChild(todoListItem);
-        });
-    });
-};
-
-export function setUpTodoFilters() {
-    document
-        .querySelector("#todo-filter-list")
-        .addEventListener("click", (e) => {
-            e.preventDefault();
-            const target = e.target;
-            if (target.tagName === "A") {
-                document.querySelectorAll("a.active").forEach((a) => {
-                    a.classList.remove("active");
-                });
-                target.classList.add("active");
-            }
-
-            switch (target.id) {
-                case "myDay":
-                    break;
-
-                case "nextDays":
-                    break;
-
-                case "allTodos":
-                    getAllTodos();
-                    break;
-                default:
-                    break;
-            }
-        });
-}
-
 /**
  * Gets all the tags from the projects
  * @returns {Array} allTags
@@ -257,7 +200,6 @@ export function buildTagList() {
  */
 
 export function showProjectDetails(project) {
-    const todoDetails = document.querySelector("#todo-details");
     const projectTitleH3 = document.querySelector("#project-title");
     const projectTitle = project.projectName;
     const todosWrapper = document.querySelector("#todos-wrapper");
@@ -269,12 +211,11 @@ export function showProjectDetails(project) {
     todosList.classList.add("todo-list");
     // clear the todos wrapper
     todosWrapper.innerHTML = "";
+    hideTodoDetails();
     // append the h3 to the todos wrapper
     todosH3.textContent = "Todos";
     todosWrapper.appendChild(todosH3);
     todosWrapper.appendChild(todosList);
-    if (!todoDetails.classList.contains("inactive"))
-        todoDetails.classList.add("inactive");
 
     buildTodoList(project);
 }

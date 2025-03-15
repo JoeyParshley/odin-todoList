@@ -5,7 +5,46 @@
     -   Follow that tutorial using this current project as a guide
 -   Play with factory functions to create projects (todoItems)
 
-# Notes
+## Journal
+
+### Description
+
+This section is used to track the work done on this project. I started it when I was mostyly finished with the UI. It is in reverse chornologocal order and its purpose is to track my work and thoughts so
+i can track my work an thoughts.
+
+#### 15MAR2025
+
+#### Status
+
+-   The `My Projects` and `My Tags` sections of the `Side Navigation` are functional
+-   The `All My Todos` filter in the `Side Navigation` is hooked up.
+-   Added the `Late Todos` filter in the `Side Navigation`
+
+#### Todos
+
+-   [x] Add `Completed Todos` filter to `Side Navigation`
+-   [x] Set Up `Late Todos` filter
+-   [ ] Implement `Late Todos` filter
+-   [x] Set Up `Next 7 days` filter
+-   [ ] Implement `Next 7 days` filter
+-   [x] Set Up `My Day` filter
+-   [ ] Implement `My Day` filter
+-   [x] Set Up `Completed` filter
+-   [ ] Implement `Completed` filter
+-   [ ] Implement checkbox - completed behavior
+-   [ ] add edit views
+
+#### Notes
+
+The functions called from the `click` eventListeners
+
+| function               | file location | called in:        | located in | called from           |
+| ---------------------- | ------------- | ----------------- | ---------- | --------------------- |
+| buildProjectDetailsDom | project.js    | buildProjectList  | index.js   | load                  |
+| buildTodoDetailsDom    | project.js    | buildAllTodosList | project.js | showFilteredTodosList |
+| buildProjectsByTag     | project.js    | buildTagList      | index.js   | load                  |
+| showFilteredTodosList  | project.js    | setUpTodoFilters  | index.js   | load                  |
+| buildTodoDetailsDom    | todo.js       | buildTodoList     | project.js | showProjectDetails    |
 
 ## Project Fields
 
@@ -73,9 +112,9 @@ Users can
 
 # Inspiration
 
--   https://app.any.do/myday
--   https://culturedcode.com/things/support/articles/2803581/#ihqkf
--   https://app.todoist.com/app/today
+-   <https://app.any.do/myday>
+-   <https://culturedcode.com/things/support/articles/2803581/#ihqkf>
+-   <https://app.todoist.com/app/today>
 
 # Deployment
 

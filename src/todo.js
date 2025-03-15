@@ -1,3 +1,4 @@
+import { allProjects } from "./index.js";
 import { Storage } from "./storage";
 import { tagManager } from "./tagManager.js";
 
@@ -190,4 +191,215 @@ export function buildTodoList(project) {
         todoListItem.appendChild(todoListItemLink);
         todoList.appendChild(todoListItem);
     });
+}
+
+/**
+ * Builds and displays a list of all todos from all projects.
+ *
+ * This function selects the project title element and the todo list wrapper element from the DOM,
+ * clears their current content, and sets the project title to "All my todos". It then iterates
+ * over all projects and their respective todos, creating and appending list items for each todo
+ * to the todo list wrapper. Each todo list item includes a checkbox and a link with event listeners
+ * to display the todo details when clicked.
+ */
+const buildAllTodosList = () => {
+    const projectTitle = document.querySelector("#project-title");
+    const todoList = document.querySelector("#todos-wrapper .todo-list");
+    hideTodoDetails();
+    todoList.innerHTML = "";
+    projectTitle.textContent = "";
+    projectTitle.textContent = "All my todos";
+    allProjects.map((project) => {
+        project.todos.map((todo) => {
+            const todoListItem = document.createElement("li");
+            const todoListItemLink = document.createElement("a");
+            const todoCheckbox = document.createElement("div");
+            todoCheckbox.classList.add("checkbox");
+            todoListItemLink.href = "#";
+            todoListItemLink.classList.add("todo-title");
+            todoListItemLink.setAttribute("data-todo-id", todo.id);
+            todoListItemLink.setAttribute("data-project-id", project.id);
+            todoListItemLink.textContent = todo.title;
+            todoListItemLink.addEventListener("click", (e) =>
+                buildTodoDetailsDom(e, project)
+            );
+            todoListItem.classList.add("todo-item");
+            todoListItem.appendChild(todoCheckbox);
+            todoListItem.appendChild(todoListItemLink);
+            todoList.appendChild(todoListItem);
+        });
+    });
+};
+
+const buildLateTodosList = () => {
+    const projectTitle = document.querySelector("#project-title");
+    const todoList = document.querySelector("#todos-wrapper .todo-list");
+    hideTodoDetails();
+    todoList.innerHTML = "";
+    projectTitle.textContent = "";
+    projectTitle.textContent = "Late todos";
+    allProjects.map((project) => {
+        project.todos.map((todo) => {
+            const todoDueDate = new Date(todo.dueDate).setHours(
+                23,
+                59,
+                59,
+                999
+            );
+            const today = new Date().setHours(23, 59, 59, 999);
+            if (todoDueDate < today) {
+                const todoListItem = document.createElement("li");
+                const todoListItemLink = document.createElement("a");
+                const todoCheckbox = document.createElement("div");
+                todoCheckbox.classList.add("checkbox");
+                todoListItemLink.href = "#";
+                todoListItemLink.classList.add("todo-title");
+                todoListItemLink.setAttribute("data-todo-id", todo.id);
+                todoListItemLink.setAttribute("data-project-id", project.id);
+                todoListItemLink.textContent = todo.title;
+                todoListItemLink.addEventListener("click", (e) =>
+                    buildTodoDetailsDom(e, project)
+                );
+                todoListItem.classList.add("todo-item");
+                todoListItem.appendChild(todoCheckbox);
+                todoListItem.appendChild(todoListItemLink);
+                todoList.appendChild(todoListItem);
+            }
+        });
+    });
+};
+
+const buildCompletedTodosList = () => {
+    const projectTitle = document.querySelector("#project-title");
+    const todoList = document.querySelector("#todos-wrapper .todo-list");
+    hideTodoDetails();
+    todoList.innerHTML = "";
+    projectTitle.textContent = "";
+    projectTitle.textContent = "Completed";
+    allProjects.map((project) => {
+        project.todos.map((todo) => {
+            const todoListItem = document.createElement("li");
+            const todoListItemLink = document.createElement("a");
+            const todoCheckbox = document.createElement("div");
+            todoCheckbox.classList.add("checkbox");
+            todoListItemLink.href = "#";
+            todoListItemLink.classList.add("todo-title");
+            todoListItemLink.setAttribute("data-todo-id", todo.id);
+            todoListItemLink.setAttribute("data-project-id", project.id);
+            todoListItemLink.textContent = todo.title;
+            todoListItemLink.addEventListener("click", (e) =>
+                buildTodoDetailsDom(e, project)
+            );
+            todoListItem.classList.add("todo-item");
+            todoListItem.appendChild(todoCheckbox);
+            todoListItem.appendChild(todoListItemLink);
+            todoList.appendChild(todoListItem);
+        });
+    });
+};
+
+const buildNextSevenDaysTodosList = () => {
+    const projectTitle = document.querySelector("#project-title");
+    const todoList = document.querySelector("#todos-wrapper .todo-list");
+    hideTodoDetails();
+    todoList.innerHTML = "";
+    projectTitle.textContent = "";
+    projectTitle.textContent = "Next 7 Days todos";
+    allProjects.map((project) => {
+        project.todos.map((todo) => {
+            const todoListItem = document.createElement("li");
+            const todoListItemLink = document.createElement("a");
+            const todoCheckbox = document.createElement("div");
+            todoCheckbox.classList.add("checkbox");
+            todoListItemLink.href = "#";
+            todoListItemLink.classList.add("todo-title");
+            todoListItemLink.setAttribute("data-todo-id", todo.id);
+            todoListItemLink.setAttribute("data-project-id", project.id);
+            todoListItemLink.textContent = todo.title;
+            todoListItemLink.addEventListener("click", (e) =>
+                buildTodoDetailsDom(e, project)
+            );
+            todoListItem.classList.add("todo-item");
+            todoListItem.appendChild(todoCheckbox);
+            todoListItem.appendChild(todoListItemLink);
+            todoList.appendChild(todoListItem);
+        });
+    });
+};
+
+const buildMyDayTodosList = () => {
+    const projectTitle = document.querySelector("#project-title");
+    const todoList = document.querySelector("#todos-wrapper .todo-list");
+    hideTodoDetails();
+    todoList.innerHTML = "";
+    projectTitle.textContent = "";
+    projectTitle.textContent = "My Day todos";
+    allProjects.map((project) => {
+        project.todos.map((todo) => {
+            const todoListItem = document.createElement("li");
+            const todoListItemLink = document.createElement("a");
+            const todoCheckbox = document.createElement("div");
+            todoCheckbox.classList.add("checkbox");
+            todoListItemLink.href = "#";
+            todoListItemLink.classList.add("todo-title");
+            todoListItemLink.setAttribute("data-todo-id", todo.id);
+            todoListItemLink.setAttribute("data-project-id", project.id);
+            todoListItemLink.textContent = todo.title;
+            todoListItemLink.addEventListener("click", (e) =>
+                buildTodoDetailsDom(e, project)
+            );
+            todoListItem.classList.add("todo-item");
+            todoListItem.appendChild(todoCheckbox);
+            todoListItem.appendChild(todoListItemLink);
+            todoList.appendChild(todoListItem);
+        });
+    });
+};
+
+export function setUpTodoFilters() {
+    document
+        .querySelector("#todo-filter-list")
+        .addEventListener("click", showFilteredTodosList());
+}
+
+function showFilteredTodosList() {
+    return (e) => {
+        e.preventDefault();
+        const target = e.target;
+        if (target.tagName === "A") {
+            document.querySelectorAll("a.active").forEach((a) => {
+                a.classList.remove("active");
+            });
+            target.classList.add("active");
+        }
+
+        switch (target.id) {
+            case "myDay":
+                buildMyDayTodosList();
+                break;
+
+            case "nextDays":
+                buildNextSevenDaysTodosList();
+                break;
+
+            case "allTodos":
+                buildAllTodosList();
+                break;
+
+            case "lateTodos":
+                buildLateTodosList();
+                break;
+
+            case "completedTodos":
+                buildCompletedTodosList();
+                break;
+            default:
+                break;
+        }
+    };
+}
+export function hideTodoDetails() {
+    const todoDetails = document.querySelector("#todo-details");
+    if (!todoDetails.classList.contains("inactive"))
+        todoDetails.classList.add("inactive");
 }
