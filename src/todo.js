@@ -109,7 +109,6 @@ export function showTodoDetails(todo, projectName) {
     const todoPriorityP = document.querySelector("#detail-priority");
     const todoNotesP = document.querySelector("#detail-notes");
     const todoTagsWrapper = document.querySelector("#detail-tags");
-    debugger;
 
     /**
      * TODO: when there is more than todo associated with the tag the `todo` is undefined in for the first todo in the todo-list
@@ -143,21 +142,19 @@ export function showTodoDetails(todo, projectName) {
  *
  * @param {Event} e - The event object from the click event.
  */
-export function buildTodoDetailsDom(e) {
+export function buildTodoDetailsDom(e, project) {
     const target = e.target;
     e.preventDefault();
     if (target.tagName === "A") {
         const todoId = target.getAttribute("data-todo-id");
-        const projectId = target.getAttribute("data-project-id");
         document.querySelectorAll(".todo-list li a").forEach((a) => {
             a.classList.remove("active");
         });
         target.classList.add("active");
-        const currentProject = Storage.getProjectById(projectId);
-        const currentTodo = currentProject.todos.find((todo) => {
+        const currentTodo = project.todos.find((todo) => {
             return todo.id === parseInt(todoId, 10);
         });
-        showTodoDetails(currentTodo, currentProject.projectName);
+        showTodoDetails(currentTodo, project.projectName);
     }
 }
 
@@ -173,7 +170,6 @@ export function buildTodoDetailsDom(e) {
  * @param {string} project.todos[].title - The title of the todo item.
  */
 export function buildTodoList(project) {
-    // debugger;
     const todoList = document.querySelector("#todos-wrapper .todo-list");
     todoList.innerHTML = "";
     project.todos.forEach((todo) => {
@@ -186,7 +182,9 @@ export function buildTodoList(project) {
         todoListItemLink.setAttribute("data-todo-id", todo.id);
         todoListItemLink.setAttribute("data-project-id", project.id);
         todoListItemLink.textContent = todo.title;
-        todoList.addEventListener("click", buildTodoDetailsDom);
+        todoListItemLink.addEventListener("click", (e) =>
+            buildTodoDetailsDom(e, project)
+        );
         todoListItem.classList.add("todo-item");
         todoListItem.appendChild(todoCheckbox);
         todoListItem.appendChild(todoListItemLink);

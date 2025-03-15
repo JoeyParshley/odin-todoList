@@ -91,9 +91,10 @@ export function buildProjectsByTag(e) {
                     }
                 });
             });
-            // replace project.todos with taggedTodos.
         });
+
         taggedProject.todos = taggedTodos;
+        console.log("taggedProject before showProjectDetails()", taggedProject);
         showProjectDetails(taggedProject);
         // populate the ui with the todos from that project using the existing display function
         // toggle the active classes.
@@ -200,5 +201,6 @@ export function showProjectDetails(project) {
     todosWrapper.appendChild(todosList);
     if (!todoDetails.classList.contains("inactive"))
         todoDetails.classList.add("inactive");
+    console.log("project before calling buildTodoList", project);
     buildTodoList(project);
 }
