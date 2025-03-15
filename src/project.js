@@ -104,6 +104,12 @@ export function buildProjectsByTag(e) {
             });
         });
 
+        taggedProject.projectName = taggedProjects
+            .reduce((projectName, project) => {
+                return projectName + project.projectName + ", ";
+            }, "")
+            .slice(0, -2);
+
         taggedProject.todos = taggedTodos;
 
         showProjectDetails(taggedProject);
