@@ -64,6 +64,17 @@ export function buildProjectDetailsDom(e) {
     }
 }
 
+/**
+ * Builds and displays projects filtered by a specific tag.
+ *
+ * This function is triggered by an event, typically a click event on a tag link.
+ * It prevents the default action of the event, identifies the target element,
+ * and then filters the projects and their associated todos based on the tag
+ * present in the target element's ID. The filtered todos are then used to
+ * build a new project object which is displayed using the `showProjectDetails` function.
+ *
+ * @param {Event} e - The event object triggered by the user interaction.
+ */
 export function buildProjectsByTag(e) {
     e.preventDefault();
     const target = e.target;
@@ -94,7 +105,7 @@ export function buildProjectsByTag(e) {
         });
 
         taggedProject.todos = taggedTodos;
-        console.log("taggedProject before showProjectDetails()", taggedProject);
+
         showProjectDetails(taggedProject);
         // populate the ui with the todos from that project using the existing display function
         // toggle the active classes.
@@ -201,6 +212,6 @@ export function showProjectDetails(project) {
     todosWrapper.appendChild(todosList);
     if (!todoDetails.classList.contains("inactive"))
         todoDetails.classList.add("inactive");
-    console.log("project before calling buildTodoList", project);
+
     buildTodoList(project);
 }
