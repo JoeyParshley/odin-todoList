@@ -1,6 +1,6 @@
 import { allProjects } from ".";
 import { Storage } from "./storage";
-import { buildTodoList } from "./todo";
+import { buildTodoList, buildTodoDetailsDom } from "./todo";
 
 export class Project {
     constructor(name, todos = []) {
@@ -145,6 +145,63 @@ export function buildProjectList() {
         projectListItem.appendChild(projectListItemLink);
         projectList.appendChild(projectListItem);
     });
+}
+
+const getAllTodos = () => {
+    const projectTitle = document.querySelector("#project-title");
+    const todoList = document.querySelector("#todos-wrapper .todo-list");
+    todoList.innerHTML = "";
+    projectTitle.textContent = "";
+    projectTitle.textContent = "All my todos";
+    allProjects.map((project) => {
+        project.todos.map((todo) => {
+            const todoListItem = document.createElement("li");
+            const todoListItemLink = document.createElement("a");
+            const todoCheckbox = document.createElement("div");
+            todoCheckbox.classList.add("checkbox");
+            todoListItemLink.href = "#";
+            todoListItemLink.classList.add("todo-title");
+            todoListItemLink.setAttribute("data-todo-id", todo.id);
+            todoListItemLink.setAttribute("data-project-id", project.id);
+            todoListItemLink.textContent = todo.title;
+            todoListItemLink.addEventListener("click", (e) =>
+                buildTodoDetailsDom(e, project)
+            );
+            todoListItem.classList.add("todo-item");
+            todoListItem.appendChild(todoCheckbox);
+            todoListItem.appendChild(todoListItemLink);
+            todoList.appendChild(todoListItem);
+        });
+    });
+};
+
+export function setUpTodoFilters() {
+    document
+        .querySelector("#todo-filter-list")
+        .addEventListener("click", (e) => {
+            e.preventDefault();
+            const target = e.target;
+            if (target.tagName === "A") {
+                document.querySelectorAll("a.active").forEach((a) => {
+                    a.classList.remove("active");
+                });
+                target.classList.add("active");
+            }
+
+            switch (target.id) {
+                case "myDay":
+                    break;
+
+                case "nextDays":
+                    break;
+
+                case "allTodos":
+                    getAllTodos();
+                    break;
+                default:
+                    break;
+            }
+        });
 }
 
 /**

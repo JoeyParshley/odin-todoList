@@ -1,6 +1,11 @@
 import "./styles/style.css";
 import { Todo } from "./todo.js";
-import { buildProjectList, buildTagList, Project } from "./project.js";
+import {
+    setUpTodoFilters,
+    buildProjectList,
+    buildTagList,
+    Project,
+} from "./project.js";
 import { TagManager } from "./tagManager.js";
 import { Storage } from "./storage.js";
 import projects from "./projects.js";
@@ -23,6 +28,7 @@ export const allProjects = JSON.parse(Storage.getProjects());
 // this is only when the projects array in projects.js is modified
 //seedLocalStorageWithProjects();
 
+setUpTodoFilters();
 // build the project list
 buildProjectList();
 // build the tag list
