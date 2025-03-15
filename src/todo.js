@@ -231,6 +231,16 @@ const buildAllTodosList = () => {
     });
 };
 
+/**
+ * Builds and displays a list of todos that are past their due date.
+ *
+ * This function selects the project title element and the todo list wrapper element from the DOM,
+ * clears their current content, and sets the project title to "Late todos". It then iterates
+ * over all projects and their respective todos, checking if the due date of each todo is before
+ * the current date. If a todo is late, it creates and appends a list item for the todo to the
+ * todo list wrapper. Each todo list item includes a checkbox and a link with event listeners
+ * to display the todo details when clicked.
+ */
 const buildLateTodosList = () => {
     const projectTitle = document.querySelector("#project-title");
     const todoList = document.querySelector("#todos-wrapper .todo-list");
@@ -240,13 +250,12 @@ const buildLateTodosList = () => {
     projectTitle.textContent = "Late todos";
     allProjects.map((project) => {
         project.todos.map((todo) => {
-            const todoDueDate = new Date(todo.dueDate).setHours(
-                23,
-                59,
-                59,
-                999
-            );
-            const today = new Date().setHours(23, 59, 59, 999);
+            const todoDateString = todo.dueDate.includes("-")
+                ? todo.dueDate.replaceAll("-", "/")
+                : todo.dueDate;
+            const todoDueDate = new Date(todoDateString);
+            const today = new Date().setHours(0, 0, 0, 0);
+
             if (todoDueDate < today) {
                 const todoListItem = document.createElement("li");
                 const todoListItemLink = document.createElement("a");
@@ -307,6 +316,13 @@ const buildNextSevenDaysTodosList = () => {
     projectTitle.textContent = "Next 7 Days todos";
     allProjects.map((project) => {
         project.todos.map((todo) => {
+            const todoDueDate = new Date(todo.dueDate).setHours(
+                23,
+                59,
+                59,
+                999
+            );
+            const today = new Date().setHours(23, 59, 59, 999);
             const todoListItem = document.createElement("li");
             const todoListItemLink = document.createElement("a");
             const todoCheckbox = document.createElement("div");
