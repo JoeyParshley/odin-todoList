@@ -1,6 +1,8 @@
+import { ta } from "date-fns/locale";
 import { allProjects } from "./index.js";
 import { Storage } from "./storage";
 import { tagManager } from "./tagManager.js";
+import { addDays, compareAsc, isAfter, isSameDay, endOfDay } from "date-fns";
 
 export class Todo {
     constructor(title, description, dueDate, priority, notes, tags = []) {
@@ -250,13 +252,16 @@ const buildLateTodosList = () => {
     projectTitle.textContent = "Late todos";
     allProjects.map((project) => {
         project.todos.map((todo) => {
-            const todoDateString = todo.dueDate.includes("-")
-                ? todo.dueDate.replaceAll("-", "/")
-                : todo.dueDate;
-            const todoDueDate = new Date(todoDateString);
-            const today = new Date().setHours(0, 0, 0, 0);
-
-            if (todoDueDate < today) {
+            const dueDate = todo.dueDate;
+            const dueDateParts = dueDate.split("-");
+            const dueDateYear = dueDateParts[0];
+            const dueDateMonth = dueDateParts[1] - 1;
+            const dueDateDay = dueDateParts[2];
+            const todoDueDate = endOfDay(
+                new Date(dueDateYear, dueDateMonth, dueDateDay)
+            );
+            const today = endOfDay(new Date());
+            if (isAfter(today, todoDueDate)) {
                 const todoListItem = document.createElement("li");
                 const todoListItemLink = document.createElement("a");
                 const todoCheckbox = document.createElement("div");
@@ -316,29 +321,37 @@ const buildNextSevenDaysTodosList = () => {
     projectTitle.textContent = "Next 7 Days todos";
     allProjects.map((project) => {
         project.todos.map((todo) => {
-            const todoDueDate = new Date(todo.dueDate).setHours(
-                23,
-                59,
-                59,
-                999
+            const dueDate = todo.dueDate;
+            const dueDateParts = dueDate.split("-");
+            const dueDateYear = dueDateParts[0];
+            const dueDateMonth = dueDateParts[1] - 1;
+            const dueDateDay = dueDateParts[2];
+            const todoDueDate = endOfDay(
+                new Date(dueDateYear, dueDateMonth, dueDateDay)
             );
-            const today = new Date().setHours(23, 59, 59, 999);
-            const todoListItem = document.createElement("li");
-            const todoListItemLink = document.createElement("a");
-            const todoCheckbox = document.createElement("div");
-            todoCheckbox.classList.add("checkbox");
-            todoListItemLink.href = "#";
-            todoListItemLink.classList.add("todo-title");
-            todoListItemLink.setAttribute("data-todo-id", todo.id);
-            todoListItemLink.setAttribute("data-project-id", project.id);
-            todoListItemLink.textContent = todo.title;
-            todoListItemLink.addEventListener("click", (e) =>
-                buildTodoDetailsDom(e, project)
-            );
-            todoListItem.classList.add("todo-item");
-            todoListItem.appendChild(todoCheckbox);
-            todoListItem.appendChild(todoListItemLink);
-            todoList.appendChild(todoListItem);
+            const today = endOfDay(new Date());
+            const sevenDaysLater = addDays(today, 7);
+            if (
+                isAfter(todoDueDate, today) &&
+                isAfter(sevenDaysLater, todoDueDate)
+            ) {
+                const todoListItem = document.createElement("li");
+                const todoListItemLink = document.createElement("a");
+                const todoCheckbox = document.createElement("div");
+                todoCheckbox.classList.add("checkbox");
+                todoListItemLink.href = "#";
+                todoListItemLink.classList.add("todo-title");
+                todoListItemLink.setAttribute("data-todo-id", todo.id);
+                todoListItemLink.setAttribute("data-project-id", project.id);
+                todoListItemLink.textContent = todo.title;
+                todoListItemLink.addEventListener("click", (e) =>
+                    buildTodoDetailsDom(e, project)
+                );
+                todoListItem.classList.add("todo-item");
+                todoListItem.appendChild(todoCheckbox);
+                todoListItem.appendChild(todoListItemLink);
+                todoList.appendChild(todoListItem);
+            }
         });
     });
 };
@@ -352,22 +365,33 @@ const buildMyDayTodosList = () => {
     projectTitle.textContent = "My Day todos";
     allProjects.map((project) => {
         project.todos.map((todo) => {
-            const todoListItem = document.createElement("li");
-            const todoListItemLink = document.createElement("a");
-            const todoCheckbox = document.createElement("div");
-            todoCheckbox.classList.add("checkbox");
-            todoListItemLink.href = "#";
-            todoListItemLink.classList.add("todo-title");
-            todoListItemLink.setAttribute("data-todo-id", todo.id);
-            todoListItemLink.setAttribute("data-project-id", project.id);
-            todoListItemLink.textContent = todo.title;
-            todoListItemLink.addEventListener("click", (e) =>
-                buildTodoDetailsDom(e, project)
+            const dueDate = todo.dueDate;
+            const dueDateParts = dueDate.split("-");
+            const dueDateYear = dueDateParts[0];
+            const dueDateMonth = dueDateParts[1] - 1;
+            const dueDateDay = dueDateParts[2];
+            const todoDueDate = endOfDay(
+                new Date(dueDateYear, dueDateMonth, dueDateDay)
             );
-            todoListItem.classList.add("todo-item");
-            todoListItem.appendChild(todoCheckbox);
-            todoListItem.appendChild(todoListItemLink);
-            todoList.appendChild(todoListItem);
+            const today = endOfDay(new Date());
+            if (isSameDay(todoDueDate, today)) {
+                const todoListItem = document.createElement("li");
+                const todoListItemLink = document.createElement("a");
+                const todoCheckbox = document.createElement("div");
+                todoCheckbox.classList.add("checkbox");
+                todoListItemLink.href = "#";
+                todoListItemLink.classList.add("todo-title");
+                todoListItemLink.setAttribute("data-todo-id", todo.id);
+                todoListItemLink.setAttribute("data-project-id", project.id);
+                todoListItemLink.textContent = todo.title;
+                todoListItemLink.addEventListener("click", (e) =>
+                    buildTodoDetailsDom(e, project)
+                );
+                todoListItem.classList.add("todo-item");
+                todoListItem.appendChild(todoCheckbox);
+                todoListItem.appendChild(todoListItemLink);
+                todoList.appendChild(todoListItem);
+            }
         });
     });
 };
@@ -388,7 +412,7 @@ function showFilteredTodosList() {
             });
             target.classList.add("active");
         }
-
+        console.log(target.id);
         switch (target.id) {
             case "myDay":
                 buildMyDayTodosList();
