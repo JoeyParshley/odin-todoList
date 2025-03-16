@@ -11,6 +11,7 @@ const projects = [
                 priority: "High",
                 tags: ["shopping", "urgent"],
                 notes: "Check for discounts on dairy products.",
+                isCompleted: false,
             },
             {
                 id: 2,
@@ -20,6 +21,7 @@ const projects = [
                 priority: "Medium",
                 tags: ["chores"],
                 notes: "Focus on the living room and kitchen.",
+                isCompleted: true,
             },
             {
                 id: 3,
@@ -29,6 +31,7 @@ const projects = [
                 priority: "Low",
                 tags: ["leisure"],
                 notes: "Read at least one chapter per day.",
+                isCompleted: false,
             },
         ],
     },
@@ -44,6 +47,7 @@ const projects = [
                 priority: "High",
                 tags: ["work", "urgent"],
                 notes: "Include the latest sales data.",
+                isCompleted: true,
             },
             {
                 id: 5,
@@ -53,6 +57,7 @@ const projects = [
                 priority: "Medium",
                 tags: ["meeting"],
                 notes: "Prepare the presentation slides.",
+                isCompleted: false,
             },
             {
                 id: 6,
@@ -62,6 +67,7 @@ const projects = [
                 priority: "Low",
                 tags: ["development"],
                 notes: "Focus on the authentication module.",
+                isCompleted: false,
             },
         ],
     },
@@ -77,6 +83,7 @@ const projects = [
                 priority: "High",
                 tags: ["exercise"],
                 notes: "Try to maintain a steady pace.",
+                isCompleted: true,
             },
             {
                 id: 8,
@@ -86,6 +93,7 @@ const projects = [
                 priority: "Medium",
                 tags: ["exercise", "wellness"],
                 notes: "Focus on breathing exercises.",
+                isCompleted: false,
             },
             {
                 id: 9,
@@ -95,6 +103,7 @@ const projects = [
                 priority: "Low",
                 tags: ["exercise"],
                 notes: "Include both upper and lower body exercises.",
+                isCompleted: false,
             },
         ],
     },

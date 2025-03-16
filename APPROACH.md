@@ -30,6 +30,7 @@ i can track my work an thoughts.
 -   [x] Set Up `My Day` filter
 -   [x] Implement `My Day` filter
 -   [x] Set Up `Completed` filter
+-   [x] add completed style to checkboxes
 -   [ ] Implement `Completed` filter
 -   [ ] Implement checkbox - completed behavior
 -   [ ] add edit views
@@ -82,14 +83,14 @@ The functions called from the `click` eventListeners
 -   TagColor
 
 ```js
-function createTodoItem(title, description, dueDate, priority, notes, isComplete) {
+function createTodoItem(title, description, dueDate, priority, notes, isCompleted) {
   return {
     name: title,
     description: description,
     dueDate: dueDate,
     priority: priority,
     notes: notes,
-    isComplete, isComplete,
+    isCompleted, isCompleted,
     greet: function () {
       return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
     },

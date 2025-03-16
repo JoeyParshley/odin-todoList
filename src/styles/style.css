@@ -30,6 +30,9 @@ html {
     border: solid 1px rebeccapurple;
     background-color: white;
     cursor: pointer;
+    &.completed {
+        background-color: rgba(102, 51, 153, 0.4);
+    }
 }
 
 .checkbox:checked {

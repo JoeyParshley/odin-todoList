@@ -5,13 +5,21 @@ import { tagManager } from "./tagManager.js";
 import { addDays, compareAsc, isAfter, isSameDay, endOfDay } from "date-fns";
 
 export class Todo {
-    constructor(title, description, dueDate, priority, notes, tags = []) {
+    constructor(
+        title,
+        description,
+        dueDate,
+        priority,
+        notes,
+        isCompleted,
+        tags = []
+    ) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.notes = notes;
-        this.isComplete = false;
+        this.isCompleted = isCompleted;
         this.tags = [];
         this.checklist = [];
         tags.forEach((tag) => this.addTag(tag));
@@ -37,8 +45,8 @@ export class Todo {
         return this.notes;
     }
 
-    getIsComplete() {
-        return this.isComplete;
+    getIsCompleted() {
+        return this.isCompleted;
     }
 
     setTitle(title) {
@@ -61,12 +69,12 @@ export class Todo {
         this.notes = notes;
     }
 
-    setIsComplete(isComplete) {
-        this.isComplete = isComplete;
+    setIsCompleted(isComplete) {
+        this.isCompleted = isComplete;
     }
 
-    toggleComplete() {
-        this.isComplete = !this.isComplete;
+    toggleCompleted() {
+        this.isCompleted = !this.isCompleted;
     }
 
     addTag(tag) {
@@ -112,6 +120,14 @@ export function showTodoDetails(todo, projectName) {
     const todoPriorityP = document.querySelector("#detail-priority");
     const todoNotesP = document.querySelector("#detail-notes");
     const todoTagsWrapper = document.querySelector("#detail-tags");
+    const todoCheckbox = document.querySelector(".details.checkbox");
+    if (todo.isCompleted) {
+        if (!todoCheckbox.classList.contains("completed"))
+            todoCheckbox.classList.add("completed");
+    } else {
+        if (todoCheckbox.classList.contains("completed"))
+            todoCheckbox.classList.remove("completed");
+    }
 
     /**
      * TODO: when there is more than todo associated with the tag the `todo` is undefined in for the first todo in the todo-list
@@ -180,6 +196,13 @@ export function buildTodoList(project) {
         const todoListItemLink = document.createElement("a");
         const todoCheckbox = document.createElement("div");
         todoCheckbox.classList.add("checkbox");
+        if (todo.isCompleted) {
+            if (!todoCheckbox.classList.contains("completed"))
+                todoCheckbox.classList.add("completed");
+        } else {
+            if (todoCheckbox.classList.contains("completed"))
+                todoCheckbox.classList.remove("completed");
+        }
         todoListItemLink.href = "#";
         todoListItemLink.classList.add("todo-title");
         todoListItemLink.setAttribute("data-todo-id", todo.id);
@@ -217,6 +240,13 @@ const buildAllTodosList = () => {
             const todoListItemLink = document.createElement("a");
             const todoCheckbox = document.createElement("div");
             todoCheckbox.classList.add("checkbox");
+            if (todo.isCompleted) {
+                if (!todoCheckbox.classList.contains("completed"))
+                    todoCheckbox.classList.add("completed");
+            } else {
+                if (todoCheckbox.classList.contains("completed"))
+                    todoCheckbox.classList.remove("completed");
+            }
             todoListItemLink.href = "#";
             todoListItemLink.classList.add("todo-title");
             todoListItemLink.setAttribute("data-todo-id", todo.id);
@@ -266,6 +296,13 @@ const buildLateTodosList = () => {
                 const todoListItemLink = document.createElement("a");
                 const todoCheckbox = document.createElement("div");
                 todoCheckbox.classList.add("checkbox");
+                if (todo.isCompleted) {
+                    if (!todoCheckbox.classList.contains("completed"))
+                        todoCheckbox.classList.add("completed");
+                } else {
+                    if (todoCheckbox.classList.contains("completed"))
+                        todoCheckbox.classList.remove("completed");
+                }
                 todoListItemLink.href = "#";
                 todoListItemLink.classList.add("todo-title");
                 todoListItemLink.setAttribute("data-todo-id", todo.id);
@@ -355,6 +392,13 @@ const buildNextSevenDaysTodosList = () => {
                 const todoListItemLink = document.createElement("a");
                 const todoCheckbox = document.createElement("div");
                 todoCheckbox.classList.add("checkbox");
+                if (todo.isCompleted) {
+                    if (!todoCheckbox.classList.contains("completed"))
+                        todoCheckbox.classList.add("completed");
+                } else {
+                    if (todoCheckbox.classList.contains("completed"))
+                        todoCheckbox.classList.remove("completed");
+                }
                 todoListItemLink.href = "#";
                 todoListItemLink.classList.add("todo-title");
                 todoListItemLink.setAttribute("data-todo-id", todo.id);
@@ -404,6 +448,13 @@ const buildMyDayTodosList = () => {
                 const todoListItemLink = document.createElement("a");
                 const todoCheckbox = document.createElement("div");
                 todoCheckbox.classList.add("checkbox");
+                if (todo.isCompleted) {
+                    if (!todoCheckbox.classList.contains("completed"))
+                        todoCheckbox.classList.add("completed");
+                } else {
+                    if (todoCheckbox.classList.contains("completed"))
+                        todoCheckbox.classList.remove("completed");
+                }
                 todoListItemLink.href = "#";
                 todoListItemLink.classList.add("todo-title");
                 todoListItemLink.setAttribute("data-todo-id", todo.id);

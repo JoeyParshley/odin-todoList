@@ -29,5 +29,3 @@ setUpTodoFilters();
 buildProjectList();
 // build the tag list
 buildTagList();
-
-console.log("projects", projects);
