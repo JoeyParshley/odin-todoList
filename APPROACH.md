@@ -31,7 +31,7 @@ i can track my work an thoughts.
 -   [x] Implement `My Day` filter
 -   [x] Set Up `Completed` filter
 -   [x] add completed style to checkboxes
--   [ ] Implement `Completed` filter
+-   [x] Implement `Completed` filter
 -   [ ] Implement checkbox - completed behavior
 -   [ ] add edit views
 
