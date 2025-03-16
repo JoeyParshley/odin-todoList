@@ -24,11 +24,11 @@ i can track my work an thoughts.
 
 -   [x] Add `Completed Todos` filter to `Side Navigation`
 -   [x] Set Up `Late Todos` filter
--   [ ] Implement `Late Todos` filter
+-   [x] Implement `Late Todos` filter
 -   [x] Set Up `Next 7 days` filter
--   [ ] Implement `Next 7 days` filter
+-   [x] Implement `Next 7 days` filter
 -   [x] Set Up `My Day` filter
--   [ ] Implement `My Day` filter
+-   [x] Implement `My Day` filter
 -   [x] Set Up `Completed` filter
 -   [ ] Implement `Completed` filter
 -   [ ] Implement checkbox - completed behavior
