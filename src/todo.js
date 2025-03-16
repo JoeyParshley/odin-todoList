@@ -312,6 +312,22 @@ const buildCompletedTodosList = () => {
     });
 };
 
+/**
+ * Builds a list of todos due within the next 7 days and updates the DOM.
+ *
+ * This function clears the current todo list and sets the project title to "Next 7 Days todos".
+ * It iterates through all projects and their todos, checking if the todo's due date is within the next 7 days.
+ * If a todo is due within this period, it creates a list item for the todo and appends it to the todo list in the DOM.
+ *
+ * Dependencies:
+ * - hideTodoDetails: Function to hide the details of the current todo.
+ * - endOfDay: Function to get the end of the day for a given date.
+ * - addDays: Function to add a specified number of days to a date.
+ * - isAfter: Function to check if one date is after another.
+ * - buildTodoDetailsDom: Function to build the DOM for the todo details.
+ *
+ * @function
+ */
 const buildNextSevenDaysTodosList = () => {
     const projectTitle = document.querySelector("#project-title");
     const todoList = document.querySelector("#todos-wrapper .todo-list");
@@ -356,6 +372,15 @@ const buildNextSevenDaysTodosList = () => {
     });
 };
 
+/**
+ * Builds and displays the list of todos due today.
+ *
+ * This function clears the current todo list and sets the project title to "My Day todos".
+ * It iterates through all projects and their todos, checking if the todo's due date is today.
+ * If a todo is due today, it creates a list item for the todo and appends it to the todo list.
+ *
+ * @function
+ */
 const buildMyDayTodosList = () => {
     const projectTitle = document.querySelector("#project-title");
     const todoList = document.querySelector("#todos-wrapper .todo-list");
@@ -396,12 +421,24 @@ const buildMyDayTodosList = () => {
     });
 };
 
+/**
+ * Sets up event listeners for the todo filters.
+ * Adds a click event listener to the element with the ID "todo-filter-list"
+ * that triggers the showFilteredTodosList function.
+ */
 export function setUpTodoFilters() {
     document
         .querySelector("#todo-filter-list")
         .addEventListener("click", showFilteredTodosList());
 }
 
+/**
+ * Returns an event handler function that filters and displays a list of todos based on the clicked link.
+ * The event handler prevents the default action, updates the active link, and calls the appropriate function
+ * to build the filtered todos list.
+ *
+ * @returns {Function} An event handler function for filtering and displaying todos.
+ */
 function showFilteredTodosList() {
     return (e) => {
         e.preventDefault();
@@ -438,6 +475,11 @@ function showFilteredTodosList() {
         }
     };
 }
+
+/**
+ * Hides the todo details section by adding the "inactive" class
+ * if it is not already present.
+ */
 export function hideTodoDetails() {
     const todoDetails = document.querySelector("#todo-details");
     if (!todoDetails.classList.contains("inactive"))
