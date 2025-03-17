@@ -12,6 +12,105 @@
 This section is used to track the work done on this project. I started it when I was mostyly finished with the UI. It is in reverse chornologocal order and its purpose is to track my work and thoughts so
 i can track my work an thoughts.
 
+---
+
+#### 17MAR2025
+
+#### Todos
+
+-   [ ] Have checkbox toggle `isCompleted` state
+-   [ ] see how AI would perist the `isCompleted` changes.
+-   [ ] add edit views
+-   [ ] create default/empty project view
+-   [ ] set `My Day` to be selected by default
+-   [ ] Add control to `create new project`
+
+#### Status
+
+-   Saving `completed` state has been implemented
+-   `BUG` once change the `completed` state get following error when refreshing the page
+
+#### error 2
+
+##### current error
+
+```
+Uncaught SyntaxError: Unexpected token 'o', "[object Obj"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at eval (index.js:21:8)
+    at ./src/index.js (main.js:366:1)
+    at __webpack_require__ (main.js:459:32)
+    at main.js:1530:37
+    at main.js:1532:12
+```
+
+##### Explanation
+
+The error message `Uncaught SyntaxError: Unexpected token 'o', "[object Obj"... is not valid JSON` indicates that the `JSON.parse()` function is attempting to parse a string that is not valid JSON. Specifically, the string it's trying to parse appears to start with `"[object Obj"`, which suggests that an `object is being converted to a string using the default toString() method instead of JSON.stringify()`. This often occurs when you try to` directly store a JavaScript object in localStorage without first converting it to a JSON string`, and then try to parse it back into an object. The `Storage.getProjects()` function is likely returning a value that is not a valid JSON string, which then fails when parsed by `JSON.parse()` in the code `export const allProjects = JSON.parse(Storage.getProjects())`;.
+
+##### Fix
+
+Set `getProjects()` to just return the JSON. why did this work before saving changes I think I may be changing the JSON when saving the `completed` state.
+
+TODO See what AI suggests for saving the project.
+
+#### error 1
+
+##### old error
+
+```
+Uncaught SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at eval (index.js:21:8)
+    at ./src/index.js (main.js:366:1)
+    at __webpack_require__ (main.js:459:32)
+    at main.js:1530:37
+    at main.js:1532:12
+```
+
+##### Explanation
+
+The code in questions is:
+
+```
+export const allProjects = JSON.parse(Storage.getProjects());
+```
+
+It looks like when the change in `completed` state tries to save to the local storage. Its saving the `current` project and not `allProjects`
+
+So something is up when getting the list of projects from `local storage`.
+
+It was passing in `currentProject` instead of `allProjects` to the `Storage.save(project)`
+
+#### 16MAR2025
+
+#### Status
+
+-   `Side Navigation` filters are functional
+-   Checkboxes reflect `isCompleted` state in UI
+-   Added the `Late Todos` filter in the `Side Navigation`
+
+#### Todos
+
+-   [x] Add `Completed Todos` filter to `Side Navigation`
+-   [x] Set Up `Late Todos` filter
+-   [x] Implement `Late Todos` filter
+-   [x] Set Up `Next 7 days` filter
+-   [x] Implement `Next 7 days` filter
+-   [x] Set Up `My Day` filter
+-   [x] Implement `My Day` filter
+-   [x] Set Up `Completed` filter
+-   [x] add completed style to checkboxes
+-   [x] Implement `Completed` filter
+-   [ ] Add click handler to checkboxes
+-   [ ] add edit views
+-   [ ] create default/empty project view
+-   [ ] set `My Day` to be selected by default
+-   [ ] Add control to `create new project`
+-   [ ] Have checkbox toggle `isCompleted` state
+
+---
+
 #### 15MAR2025
 
 #### Status
@@ -34,6 +133,10 @@ i can track my work an thoughts.
 -   [x] Implement `Completed` filter
 -   [ ] Implement checkbox - completed behavior
 -   [ ] add edit views
+-   [ ] create default/empty project view
+-   [ ] set `My Day` to be selected by default
+-   [ ] Add control to `create new project`
+-   [ ] Have checkbox toggle `isCompleted` state
 
 #### Notes
 

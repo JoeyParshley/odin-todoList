@@ -1,8 +1,7 @@
-import { ta } from "date-fns/locale";
 import { allProjects } from "./index.js";
-import { Storage } from "./storage";
 import { tagManager } from "./tagManager.js";
-import { addDays, compareAsc, isAfter, isSameDay, endOfDay } from "date-fns";
+import { addDays, isAfter, isSameDay, endOfDay } from "date-fns";
+import { toggleTodoCompletion } from "./toggleTodoCompletion.js";
 
 export class Todo {
     constructor(
@@ -111,7 +110,7 @@ export class Todo {
  * @param {Array<string>}   todo.tags        Tags associated with the todo item.
  * @param {string}          projectName      The name of the project the todo item belongs to.
  */
-export function showTodoDetails(todo, projectName) {
+export function showTodoDetails(todo, project) {
     const todoDetails = document.querySelector("#todo-details");
     const breadcrumbsElement = document.querySelector("#breadcrumbs");
     const todoNameH3 = document.querySelector("#detail-name");
@@ -121,6 +120,9 @@ export function showTodoDetails(todo, projectName) {
     const todoNotesP = document.querySelector("#detail-notes");
     const todoTagsWrapper = document.querySelector("#detail-tags");
     const todoCheckbox = document.querySelector(".details.checkbox");
+    todoCheckbox.addEventListener("click", (e) =>
+        toggleCompletedStatus(e, project.id, todo.id)
+    );
     if (todo.isCompleted) {
         if (!todoCheckbox.classList.contains("completed"))
             todoCheckbox.classList.add("completed");
@@ -134,7 +136,7 @@ export function showTodoDetails(todo, projectName) {
      *
      * Need a way to handle, multiple projects/todos when checking the filtered links so can display all project/todo titles associated with the tag
      */
-    breadcrumbsElement.textContent = `My Projects > ${projectName}`;
+    breadcrumbsElement.textContent = `My Projects > ${project.projectName}`;
     todoNameH3.textContent = "";
     todoNameH3.textContent = todo.title;
     todoDescriptionP.textContent = "";
@@ -173,7 +175,7 @@ export function buildTodoDetailsDom(e, project) {
         const currentTodo = project.todos.find((todo) => {
             return todo.id === parseInt(todoId, 10);
         });
-        showTodoDetails(currentTodo, project.projectName);
+        showTodoDetails(currentTodo, project);
     }
 }
 
@@ -196,6 +198,9 @@ export function buildTodoList(project) {
         const todoListItemLink = document.createElement("a");
         const todoCheckbox = document.createElement("div");
         todoCheckbox.classList.add("checkbox");
+        todoCheckbox.addEventListener("click", (e) =>
+            toggleCompletedStatus(e, project.id, todo.id)
+        );
         if (todo.isCompleted) {
             if (!todoCheckbox.classList.contains("completed"))
                 todoCheckbox.classList.add("completed");
@@ -240,6 +245,9 @@ const buildAllTodosList = () => {
             const todoListItemLink = document.createElement("a");
             const todoCheckbox = document.createElement("div");
             todoCheckbox.classList.add("checkbox");
+            todoCheckbox.addEventListener("click", (e) =>
+                toggleCompletedStatus(e, project.id, todo.id)
+            );
             if (todo.isCompleted) {
                 if (!todoCheckbox.classList.contains("completed"))
                     todoCheckbox.classList.add("completed");
@@ -296,6 +304,9 @@ const buildLateTodosList = () => {
                 const todoListItemLink = document.createElement("a");
                 const todoCheckbox = document.createElement("div");
                 todoCheckbox.classList.add("checkbox");
+                todoCheckbox.addEventListener("click", (e) =>
+                    toggleCompletedStatus(e, project.id, todo.id)
+                );
                 if (todo.isCompleted) {
                     if (!todoCheckbox.classList.contains("completed"))
                         todoCheckbox.classList.add("completed");
@@ -334,6 +345,9 @@ const buildCompletedTodosList = () => {
                 const todoListItemLink = document.createElement("a");
                 const todoCheckbox = document.createElement("div");
                 todoCheckbox.classList.add("checkbox");
+                todoCheckbox.addEventListener("click", (e) =>
+                    toggleCompletedStatus(e, project.id, todo.id)
+                );
                 if (todo.isCompleted) {
                     if (!todoCheckbox.classList.contains("completed"))
                         todoCheckbox.classList.add("completed");
@@ -401,6 +415,9 @@ const buildNextSevenDaysTodosList = () => {
                 const todoListItemLink = document.createElement("a");
                 const todoCheckbox = document.createElement("div");
                 todoCheckbox.classList.add("checkbox");
+                todoCheckbox.addEventListener("click", (e) =>
+                    toggleCompletedStatus(e, project.id, todo.id)
+                );
                 if (todo.isCompleted) {
                     if (!todoCheckbox.classList.contains("completed"))
                         todoCheckbox.classList.add("completed");
@@ -457,6 +474,9 @@ const buildMyDayTodosList = () => {
                 const todoListItemLink = document.createElement("a");
                 const todoCheckbox = document.createElement("div");
                 todoCheckbox.classList.add("checkbox");
+                todoCheckbox.addEventListener("click", (e) =>
+                    toggleCompletedStatus(e, project.id, todo.id)
+                );
                 if (todo.isCompleted) {
                     if (!todoCheckbox.classList.contains("completed"))
                         todoCheckbox.classList.add("completed");
@@ -544,4 +564,23 @@ export function hideTodoDetails() {
     const todoDetails = document.querySelector("#todo-details");
     if (!todoDetails.classList.contains("inactive"))
         todoDetails.classList.add("inactive");
+}
+
+/**
+ * Toggles the completed status of a todo item and updates the UI
+ * @param {Event} e - The event object
+ * @param {number} projectId - ID of the project containing the todo
+ * @param {number} todoId - ID of the todo to change
+ */
+function toggleCompletedStatus(e, projectId, todoId) {
+    // Toggle the isCompleted property of the todo in the project and udpate allProjects and local storage.
+    debugger;
+    toggleTodoCompletion(projectId, todoId);
+
+    // update the UI
+    const completedClassName = "completed";
+    const target = e.target;
+    target.classList.contains(completedClassName)
+        ? target.classList.remove(completedClassName)
+        : target.classList.add(completedClassName);
 }
