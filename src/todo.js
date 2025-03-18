@@ -120,6 +120,7 @@ export function showTodoDetails(todo, project) {
     const todoNotesP = document.querySelector("#detail-notes");
     const todoTagsWrapper = document.querySelector("#detail-tags");
     const todoCheckbox = document.querySelector(".details.checkbox");
+
     todoCheckbox.addEventListener("click", (e) =>
         toggleCompletedStatus(e, project.id, todo.id)
     );
@@ -137,16 +138,13 @@ export function showTodoDetails(todo, project) {
      * Need a way to handle, multiple projects/todos when checking the filtered links so can display all project/todo titles associated with the tag
      */
     breadcrumbsElement.textContent = `My Projects > ${project.projectName}`;
-    todoNameH3.textContent = "";
-    todoNameH3.textContent = todo.title;
-    todoDescriptionP.textContent = "";
-    todoDescriptionP.textContent = todo.description;
-    todoDueDateP.textContent = "";
-    todoDueDateP.textContent = todo.dueDate;
-    todoPriorityP.textContent = "";
-    todoPriorityP.textContent = todo.priority;
-    todoNotesP.textContent = "";
-    todoNotesP.textContent = todo.notes;
+
+    setFieldContent(todoNameH3, todo, "title");
+    setFieldContent(todoDescriptionP, todo, "description");
+    setFieldContent(todoDueDateP, todo, "dueDate");
+    setFieldContent(todoPriorityP, todo, "priority");
+    setFieldContent(todoNotesP, todo, "notes");
+
     todoTagsWrapper.innerHTML = "";
     todo.tags.forEach((tag) => {
         const span = document.createElement("span");
@@ -156,6 +154,27 @@ export function showTodoDetails(todo, project) {
     });
     todoDetails.classList.remove("inactive");
 }
+
+/**
+ * Sets the content of a specified element based on a todo object's property and makes it editable on click.
+ *
+ * @param {HTMLElement} element - The DOM element whose content is to be set.
+ * @param {Object} todo - The todo object containing the data.
+ * @param {string} todoKey - The key of the todo object whose value is to be set as the element's content.
+ */
+const setFieldContent = (element, todo, todoKey) => {
+    element.textContent = "";
+    element.textContent = todo[todoKey];
+    console.log(todo[todoKey]);
+
+    element.addEventListener("click", (e) => {
+        e.target.setAttribute("contenteditable", "true");
+    });
+    element.addEventListener("blur", (e) => {
+        e.target.removeAttribute("contenteditable");
+        console.log(`todo[${todoKey}] = ${todo[todoKey]}`);
+    });
+};
 
 /**
  * Handles the click event on a todo item link, updates the active state,
@@ -193,7 +212,7 @@ export function buildTodoDetailsDom(e, project) {
 export function buildTodoList(project) {
     const todoList = document.querySelector("#todos-wrapper .todo-list");
     todoList.innerHTML = "";
-    project.todos.forEach((todo) => {
+    project.todos.map((todo) => {
         const todoListItem = document.createElement("li");
         const todoListItemLink = document.createElement("a");
         const todoCheckbox = document.createElement("div");

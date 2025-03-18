@@ -18,9 +18,13 @@ i can track my work an thoughts.
 
 #### Todos
 
--   [ ] Have checkbox toggle `isCompleted` state
--   [ ] see how AI would perist the `isCompleted` changes.
--   [ ] add edit views
+-   [x] Have checkbox toggle `isCompleted` state
+-   [x] see how AI would perist the `isCompleted` changes.
+-   [x] make `#detail-name` H3 tag editable when `click`ed
+-   [ ] make `#detail-name` H3 tag save its change when `blur`red
+-   [ ] Add the `click` and `blur` handlers to all `todo-detail` text elements.
+-   [ ] Have `Edit` button make all fields editable and focus on Title
+-   [ ] Add `Save` button that is visible when any fields are editable.
 -   [ ] create default/empty project view
 -   [ ] set `My Day` to be selected by default
 -   [ ] Add control to `create new project`
@@ -29,6 +33,14 @@ i can track my work an thoughts.
 
 -   Saving `completed` state has been implemented
 -   `BUG` once change the `completed` state get following error when refreshing the page
+
+#### contenteditable
+
+-   going to try to use the `contenteditanble` on the text elements when you click on one it will become editanle. When you remove focus you will save the change.
+-   the `contenteditable` [global attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes) is an enumerated attribute indicating if the element should be editable.
+    -   the attribute must take `true`|`""` which indicates that the element is editable, `false` or `plaintext-only` which indicates that the element's raw text is editable but rich terxt formatting is dsiabled. It the attribute is givven without a value it value is treated as an `""`
+    -   if the attribute is missing or its value is invalid its value is _inherited_ from its parent element.
+    -   you can set the color used to draw the text insertion [caret](https://developer.mozilla.org/en-US/docs/Glossary/Caret) with the CSS [caret-color](https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color) property
 
 #### error 2
 

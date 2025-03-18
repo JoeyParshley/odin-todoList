@@ -168,7 +168,12 @@ a {
                             h4 {
                                 margin: 0;
                                 padding: 0;
+                                &[contenteditable="true"] {
+                                    outline: dashed thin
+                                        rgba(102, 51, 153, 0.25);
+                                }
                             }
+
                             #detail-description {
                                 grid-column: 1 / 3;
                             }
