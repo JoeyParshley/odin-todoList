@@ -1,16 +1,28 @@
-# Set up Webpack
-
--   Follow steps [here](https://www.theodinproject.com/lessons/node-path-javascript-restaurant-page)
-    -   This uses [this](https://www.theodinproject.com/lessons/javascript-webpack)
-    -   Follow that tutorial using this current project as a guide
--   Play with factory functions to create projects (todoItems)
-
 ## Journal
 
 ### Description
 
 This section is used to track the work done on this project. I started it when I was mostyly finished with the UI. It is in reverse chornologocal order and its purpose is to track my work and thoughts so
 i can track my work an thoughts.
+
+---
+
+#### 18MAR2025
+
+#### Todos
+
+-   [ ] switch approach to use the `edit` button to make all fields editable and then add a `save` button persist them.
+-   [ ] Remove the event listener from the all the text fields and move it to the `Edit` button
+-   [ ] Add a save button
+-   [ ] Clicking `Edit` button makes all fields editable amd
+-   [ ] Clicking the Completed Button updates the details view and vice versa
+
+#### Status
+
+-   Saving `completed` state has been implemented
+-   `BUG` once change the `completed` state get following error when refreshing the page
+
+---
 
 ---
 
@@ -199,15 +211,15 @@ The functions called from the `click` eventListeners
 
 ```js
 function createTodoItem(title, description, dueDate, priority, notes, isCompleted) {
-  return {
-    name: title,
+	return {
+		name: title,
     description: description,
     dueDate: dueDate,
     priority: priority,
     notes: notes,
     isCompleted, isCompleted,
     greet: function () {
-      return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+		return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
     },
   };
 }
@@ -252,3 +264,10 @@ const taggedTodoTitles = taggedTodos.reduce((todoTitles, todo) => {
     return todoTitles;
 }, []);
 ```
+
+# Set up Webpack
+
+-   Follow steps [here](https://www.theodinproject.com/lessons/node-path-javascript-restaurant-page)
+    -   This uses [this](https://www.theodinproject.com/lessons/javascript-webpack)
+    -   Follow that tutorial using this current project as a guide
+-   Play with factory functions to create projects (todoItems)

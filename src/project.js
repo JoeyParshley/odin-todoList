@@ -1,6 +1,7 @@
 import { allProjects } from ".";
 import { Storage } from "./storage";
-import { buildTodoList, hideTodoDetails } from "./todo";
+import { hideTodoDetails } from "./hideTodoDetails";
+import { buildTodoList } from "./buildTodoList";
 
 export class Project {
     constructor(name, todos = []) {
