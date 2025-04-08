@@ -101,6 +101,8 @@ export const setFieldContent = (element, todo, todoKey) => {
  */
 
 export const toggleEditMode = (e, todo) => {
+    const projects = Storage.getProjects();
+    const parsedProjects = JSON.parse(projects);
     const todoDetails = document.querySelector("#todo-details");
     const editButton = document.querySelector("#edit-button");
     let cancelButton = document.querySelector("#cancel-button");
@@ -179,6 +181,13 @@ export const toggleEditMode = (e, todo) => {
                 }
             });
             console.log("project after", project);
+            console.log("parsedProjects", parsedProjects);
+            parsedProjects.forEach((parsedProject) => {
+                if (parsedProject.id === project.id) {
+                    parsedProject.todos = projectTodos;
+                }
+            });
+            console.log("parsedProjects after", parsedProjects);
             // toggleEditMode(e, todo);
             // Exit edit mode
             todoDetails.classList.remove("editing");
