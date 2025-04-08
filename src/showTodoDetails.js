@@ -119,11 +119,7 @@ export const toggleEditMode = (e, todo) => {
             "[contenteditable='true']"
         );
         editableFields.forEach((field) => {
-            field.removeAttribute("contenteditable");
-            // restore the original value
-            const originalValue = field.getAttribute("data-original-value");
-            field.textContent = originalValue;
-            field.removeAttribute("data-original-value");
+            restoreOriginalValue(field);
         });
     } else {
         // Enter edit mode
@@ -173,3 +169,10 @@ export const toggleEditMode = (e, todo) => {
         });
     }
 };
+function restoreOriginalValue(field) {
+    field.removeAttribute("contenteditable");
+    // restore the original value
+    const originalValue = field.getAttribute("data-original-value");
+    field.textContent = originalValue;
+    field.removeAttribute("data-original-value");
+}
