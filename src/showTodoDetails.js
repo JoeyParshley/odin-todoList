@@ -1,4 +1,5 @@
 import { toggleCompletedStatus } from "./todo";
+import { Storage } from "./storage";
 
 /**
  * Displays the details of a todo item in the UI.
@@ -105,6 +106,12 @@ export const toggleEditMode = (e, todo) => {
     let cancelButton = document.querySelector("#cancel-button");
     let saveButton = document.querySelector("#save-button");
     const isEditing = todoDetails.classList.contains("editing");
+    // get project name from the breadcrumbs
+    const breadcrumbsElement = document.querySelector("#breadcrumbs");
+    const projectName = breadcrumbsElement.textContent.split(">")[1].trim();
+    // get project from storage
+    const project = Storage.getProjectByName(projectName);
+    const projectTodos = project.todos;
     const fieldsToEdit = [
         "#detail-name",
         "#detail-description",
@@ -155,15 +162,31 @@ export const toggleEditMode = (e, todo) => {
                 // get property name from the selector
                 const propertyName = selector.replace("#detail-", "");
                 if (originalValue !== newValue) {
-                    console.log(
-                        `Saving ${selector} from ${originalValue} to ${newValue}`
-                    );
-                    console.log("todo", todo);
                     todo[propertyName] = newValue;
-                    console.log("todo after", todo);
                 }
             });
+
+            console.log("project", project);
+            projectTodos.forEach((projectTodo) => {
+                if (projectTodo.id === todo.id) {
+                    projectTodo.title = todo.title;
+                    projectTodo.description = todo.description;
+                    projectTodo.dueDate = todo.dueDate;
+                    projectTodo.priority = todo.priority;
+                    projectTodo.notes = todo.notes;
+                    projectTodo.tags = todo.tags;
+                    projectTodo.isCompleted = todo.isCompleted;
+                }
+            });
+            console.log("project after", project);
             // toggleEditMode(e, todo);
+            // Exit edit mode
+            todoDetails.classList.remove("editing");
+            editButton.classList.remove("hidden");
+
+            // Remove cancel and save buttons
+            if (cancelButton) cancelButton.remove();
+            if (saveButton) saveButton.remove();
             const editableFields = todoDetails.querySelectorAll(
                 "[contenteditable='true']"
             );

@@ -31,4 +31,12 @@ export class Storage {
             return project.id === parseInt(id, 10);
         });
     }
+
+    static getProjectByName(name) {
+        const projects = Storage.getProjects();
+        const parsedProjects = JSON.parse(projects);
+        return parsedProjects.find((project) => {
+            return project.projectName === name;
+        });
+    }
 }
