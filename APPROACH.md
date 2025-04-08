@@ -11,11 +11,11 @@ i can track my work an thoughts.
 
 #### Todos
 
--   [ ] switch approach to use the `edit` button to make all fields editable and then add a `save` button persist them.
--   [ ] Remove the event listener from the all the text fields and move it to the `Edit` button
--   [ ] Add a save button
--   [ ] Clicking `Edit` button makes all fields editable amd
--   [ ] Clicking the Completed Button updates the details view and vice versa
+-   [x] switch approach to use the `edit` button to make all fields editable and then add a `save` button persist them.
+-   [x] Remove the event listener from the all the text fields and move it to the `Edit` button
+-   [x] Add a save button
+-   [x] Clicking `Edit` button makes all fields editable amd
+-   [x] Clicking the Completed Button updates the details view and vice versa
 
 #### Status
 
