@@ -105,6 +105,13 @@ export const toggleEditMode = (e, todo) => {
     let cancelButton = document.querySelector("#cancel-button");
     let saveButton = document.querySelector("#save-button");
     const isEditing = todoDetails.classList.contains("editing");
+    const fieldsToEdit = [
+        "#detail-name",
+        "#detail-description",
+        "#detail-dueDate",
+        "#detail-priority",
+        "#detail-notes",
+    ];
 
     if (isEditing) {
         // Exit edit mode
@@ -141,17 +148,31 @@ export const toggleEditMode = (e, todo) => {
         saveButton.addEventListener("click", () => {
             // Save logic here
             console.log("Save changes");
-            toggleEditMode(e, todo);
+            fieldsToEdit.forEach((selector) => {
+                const field = document.querySelector(selector);
+                const originalValue = field.getAttribute("data-original-value");
+                const newValue = field.textContent;
+                // get property name from the selector
+                const propertyName = selector.replace("#detail-", "");
+                if (originalValue !== newValue) {
+                    console.log(
+                        `Saving ${selector} from ${originalValue} to ${newValue}`
+                    );
+                    console.log("todo", todo);
+                    todo[propertyName] = newValue;
+                    console.log("todo after", todo);
+                }
+            });
+            // toggleEditMode(e, todo);
+            const editableFields = todoDetails.querySelectorAll(
+                "[contenteditable='true']"
+            );
+            editableFields.forEach((field) => {
+                field.removeAttribute("contenteditable");
+                field.removeAttribute("data-original-value");
+            });
         });
         todoDetails.appendChild(saveButton);
-
-        const fieldsToEdit = [
-            "#detail-name",
-            "#detail-description",
-            "#detail-dueDate",
-            "#detail-priority",
-            "#detail-notes",
-        ];
 
         fieldsToEdit.forEach((selector) => {
             const field = document.querySelector(selector);
