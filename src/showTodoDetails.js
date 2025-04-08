@@ -156,7 +156,6 @@ export const toggleEditMode = (e, todo) => {
         saveButton.textContent = "Save";
         saveButton.addEventListener("click", () => {
             // Save logic here
-            console.log("Save changes");
             fieldsToEdit.forEach((selector) => {
                 const field = document.querySelector(selector);
                 const originalValue = field.getAttribute("data-original-value");
@@ -168,7 +167,6 @@ export const toggleEditMode = (e, todo) => {
                 }
             });
 
-            console.log("project", project);
             projectTodos.forEach((projectTodo) => {
                 if (projectTodo.id === todo.id) {
                     projectTodo.title = todo.title;
@@ -180,14 +178,12 @@ export const toggleEditMode = (e, todo) => {
                     projectTodo.isCompleted = todo.isCompleted;
                 }
             });
-            console.log("project after", project);
-            console.log("parsedProjects", parsedProjects);
             parsedProjects.forEach((parsedProject) => {
                 if (parsedProject.id === project.id) {
                     parsedProject.todos = projectTodos;
                 }
             });
-            console.log("parsedProjects after", parsedProjects);
+            Storage.saveProjects(JSON.stringify(parsedProjects));
             // toggleEditMode(e, todo);
             // Exit edit mode
             todoDetails.classList.remove("editing");

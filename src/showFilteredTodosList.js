@@ -21,7 +21,6 @@ export function showFilteredTodosList() {
             });
             target.classList.add("active");
         }
-        console.log(target.id);
         switch (target.id) {
             case "myDay":
                 buildMyDayTodosList();
