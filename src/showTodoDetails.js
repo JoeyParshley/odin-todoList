@@ -73,15 +73,6 @@ export function showTodoDetails(todo, project) {
 export const setFieldContent = (element, todo, todoKey) => {
     element.textContent = "";
     element.textContent = todo[todoKey];
-    console.log(todo[todoKey]);
-
-    element.addEventListener("click", (e) => {
-        e.target.setAttribute("contenteditable", "true");
-    });
-    element.addEventListener("blur", (e) => {
-        e.target.removeAttribute("contenteditable");
-        console.log(`todo[${todoKey}] = ${todo[todoKey]}`);
-    });
 };
 
 /**
@@ -117,7 +108,6 @@ export const toggleEditMode = (e, todo) => {
 
     if (isEditing) {
         // Exit edit mode
-
         todoDetails.classList.remove("editing");
         editButton.classList.remove("hidden");
 
@@ -130,6 +120,10 @@ export const toggleEditMode = (e, todo) => {
         );
         editableFields.forEach((field) => {
             field.removeAttribute("contenteditable");
+            // restore the original value
+            const originalValue = field.getAttribute("data-original-value");
+            field.textContent = originalValue;
+            field.removeAttribute("data-original-value");
         });
     } else {
         // Enter edit mode
@@ -162,10 +156,19 @@ export const toggleEditMode = (e, todo) => {
             "#detail-priority",
             "#detail-notes",
         ];
+
         fieldsToEdit.forEach((selector) => {
             const field = document.querySelector(selector);
             if (field) {
+                // Make the field editable
                 field.setAttribute("contenteditable", "true");
+                // perist the original value
+                // so we can restore it if the user clicks cancel
+                field.setAttribute("data-original-value", field.textContent);
+                // add click handler to clear the field value
+                field.addEventListener("click", (e) => {
+                    field.textContent = "";
+                });
             }
         });
     }
