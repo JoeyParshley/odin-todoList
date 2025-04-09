@@ -1,8 +1,6 @@
 import "./styles/style.css";
-import { Todo } from "./todo.js";
-import { buildProjectList, buildTagList, Project } from "./project.js";
+import { buildProjectList, buildTagList } from "./project.js";
 import { setUpTodoFilters } from "./setUpTodoFilters.js";
-import { TagManager } from "./tagManager.js";
 import { Storage } from "./storage.js";
 import projects from "./projects.js";
 

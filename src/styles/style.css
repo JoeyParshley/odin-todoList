@@ -45,6 +45,12 @@ h1 {
 }
 
 h3 {
+    display: grid;
+    grid-template-columns: 1fr 20px;
+}
+
+h3,
+h3 a {
     color: rebeccapurple;
 }
 
@@ -66,6 +72,13 @@ h3,
 h4 {
     margin: 0;
     padding: 0;
+}
+
+[contenteditable] {
+    outline: dashed thin rgba(102, 51, 153, 0.25);
+    &:focus {
+        outline: solid thin rebeccapurple;
+    }
 }
 
 .container {

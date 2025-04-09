@@ -2,6 +2,7 @@ import { allProjects } from ".";
 import { Storage } from "./storage";
 import { hideTodoDetails } from "./hideTodoDetails";
 import { buildTodoList } from "./buildTodoList";
+import { fi } from "date-fns/locale";
 
 export class Project {
     constructor(name, todos = []) {
@@ -40,6 +41,14 @@ export class Project {
         newProject.todos.push(todoToMove);
     }
 }
+
+document.querySelector("#add-project").addEventListener("click", (e) => {
+    console.log("Add project button clicked");
+});
+
+document.querySelector("#add-tag").addEventListener("click", (e) => {
+    console.log("Add tag button clicked");
+});
 
 /**
  * @param {*} e
@@ -206,7 +215,23 @@ export function showProjectDetails(project) {
     const todosWrapper = document.querySelector("#todos-wrapper");
     const todosH3 = document.createElement("h3");
     const todosList = document.createElement("ul");
+    const todosNameSpan = document.createElement("span");
+    const addTodoLink = document.createElement("a");
+    const todoDetails = document.querySelector("#todo-details");
+    const breadcrumbsElement = document.querySelector("#breadcrumbs");
+    breadcrumbsElement.textContent = `My Projects > ${project.projectName}`;
+    const editButton = document.querySelector("#edit-button");
+    let cancelButton = document.querySelector("#cancel-button");
+    let saveButton = document.querySelector("#save-button");
+
     const projectTodos = project.todos;
+    const fieldsToEdit = [
+        "#detail-name",
+        "#detail-description",
+        "#detail-dueDate",
+        "#detail-priority",
+        "#detail-notes",
+    ];
 
     projectTitleH3.textContent = projectTitle;
     todosList.classList.add("todo-list");
@@ -214,7 +239,64 @@ export function showProjectDetails(project) {
     todosWrapper.innerHTML = "";
     hideTodoDetails();
     // append the h3 to the todos wrapper
-    todosH3.textContent = "Todos";
+    todosNameSpan.textContent = "Todos";
+    addTodoLink.href = "#";
+    addTodoLink.textContent = "+";
+    addTodoLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        fieldsToEdit.forEach((field) => {
+            const fieldElement = document.querySelector(field);
+            const defaultValue = field.split("#")[1].split("-")[1];
+            fieldElement.textContent = `Enter ${
+                defaultValue.charAt(0).toUpperCase() + defaultValue.slice(1)
+            }`;
+            fieldElement.setAttribute(
+                "data-original-value",
+                fieldElement.textContent
+            );
+            fieldElement.toggleAttribute("contenteditable");
+            fieldElement.addEventListener("click", (e) => {
+                e.stopPropagation();
+                e.target.textContent = "";
+            });
+            fieldElement.addEventListener("focus", (e) => {
+                e.target.textContent = "";
+            });
+            fieldElement.addEventListener("blur", (e) => {
+                if (e.target.textContent.trim() === "") {
+                    e.target.textContent = `Enter ${
+                        defaultValue.charAt(0).toUpperCase() +
+                        defaultValue.slice(1)
+                    }`;
+                }
+            });
+        });
+
+        // Create cancel button
+        cancelButton = document.createElement("button");
+        cancelButton.id = "cancel-button";
+        cancelButton.textContent = "Cancel";
+        cancelButton.addEventListener("click", () => {
+            console.log("Cancel button clicked");
+        });
+
+        // Create save button
+        saveButton = document.createElement("button");
+        saveButton.id = "save-button";
+        saveButton.textContent = "Save";
+        saveButton.addEventListener("click", () => {
+            console.log("Save button clicked");
+        });
+        // Hide edit button
+        editButton.classList.add("hidden");
+        // Append cancel and save buttons
+        todoDetails.appendChild(cancelButton);
+        todoDetails.appendChild(saveButton);
+        todoDetails.classList.remove("inactive");
+    });
+
+    todosH3.appendChild(todosNameSpan);
+    todosH3.appendChild(addTodoLink);
     todosWrapper.appendChild(todosH3);
     todosWrapper.appendChild(todosList);
 

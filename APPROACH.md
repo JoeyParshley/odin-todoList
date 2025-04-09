@@ -9,7 +9,7 @@ i can track my work an thoughts.
 
 #### 07APR2025
 
--   [] Add a button to create a new project
+-   [x] Add a button to create a new project
 -   [] Implement functionality to create a new project
 -   [] Add control to delete a project
 -   [] Add control to update a project
