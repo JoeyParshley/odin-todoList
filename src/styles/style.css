@@ -246,6 +246,11 @@ h4 {
         }
     }
 
+    h2 {
+        display: grid;
+        grid-template-columns: 95% 5%;
+    }
+
     .menu.side-menu {
         display: grid;
 
