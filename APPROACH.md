@@ -7,12 +7,27 @@ i can track my work an thoughts.
 
 ---
 
+#### 08APR2025
+
+-   [ ] Implement Save functionality on Add Todo flow
+-   [ ] Implement Cancel functionality on Add Todo flow
+-   [ ] Add contol to add Tag to Todo details
+-   [ ] Add control to remove Tag from Todo details
+-   [ ] Implement functionality to create a new project
+-   [ ] Add way to save Tags to Local storage as their own entity
+-   [ ] Consolidate Edit/add todo details code is in two places (index and showTodoDetails)
+
+---
+
 #### 07APR2025
 
 -   [x] Add a button to create a new project
--   [] Implement functionality to create a new project
--   [] Add control to delete a project
--   [] Add control to update a project
+-   [x] Add control to add a todo to a project
+-   [x] Add control to add Tag Tags list
+-   [ ] Implement functionality to create a new project
+-   [ ] Implement Save functionality on Add Todo flow
+-   [ ] Add contol to add Tag to Todo details
+-   [ ] Add control to remove Tag from Todo details
 
 ---
 

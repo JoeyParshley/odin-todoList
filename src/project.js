@@ -277,7 +277,18 @@ export function showProjectDetails(project) {
         cancelButton.id = "cancel-button";
         cancelButton.textContent = "Cancel";
         cancelButton.addEventListener("click", () => {
-            console.log("Cancel button clicked");
+            fieldsToEdit.forEach((field) => {
+                const fieldElement = document.querySelector(field);
+                const originalValue = fieldElement.getAttribute(
+                    "data-original-value"
+                );
+                fieldElement.textContent = originalValue;
+                fieldElement.toggleAttribute("contenteditable", false);
+            });
+            cancelButton.remove();
+            saveButton.remove();
+            todoDetails.classList.add("inactive");
+            editButton.classList.remove("hidden");
         });
 
         // Create save button
@@ -285,7 +296,50 @@ export function showProjectDetails(project) {
         saveButton.id = "save-button";
         saveButton.textContent = "Save";
         saveButton.addEventListener("click", () => {
-            console.log("Save button clicked");
+            console.log(
+                "save button click handler in showProjectDetails in project.js"
+            );
+
+            // gather new todo field values for name, description, dueDate, priority, notes, tags
+            const newTodoTitle =
+                document.querySelector("#detail-name").textContent;
+            const newTodoDescription = document.querySelector(
+                "#detail-description"
+            ).textContent;
+            const newTodoDueDate =
+                document.querySelector("#detail-dueDate").textContent;
+            const newTodoPriority =
+                document.querySelector("#detail-priority").textContent;
+            const newTodoNotes =
+                document.querySelector("#detail-notes").textContent;
+            const newTodoTags = [];
+            // create a new todo object
+            const newTodo = {
+                title: newTodoTitle,
+                description: newTodoDescription,
+                dueDate: newTodoDueDate,
+                priority: newTodoPriority,
+                notes: newTodoNotes,
+                tags: newTodoTags,
+            };
+
+            // add todo to the UI
+            buildTodoList(project);
+            // Add new todo to the project
+            project.todos.push(newTodo);
+            // update project in allProjects
+            allProjects.map((proj) => {
+                if (proj.projectName === project.projectName) {
+                    proj.todos.push(newTodo);
+                }
+            });
+            // save project to storage
+            Storage.saveProjects(JSON.stringify(allProjects));
+            // hide save and cancel buttons and show edit button
+            cancelButton.remove();
+            saveButton.remove();
+            todoDetails.classList.remove("inactive");
+            editButton.classList.remove("hidden");
         });
         // Hide edit button
         editButton.classList.add("hidden");

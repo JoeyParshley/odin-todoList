@@ -155,6 +155,9 @@ export const toggleEditMode = (e, todo) => {
         saveButton.id = "save-button";
         saveButton.textContent = "Save";
         saveButton.addEventListener("click", () => {
+            console.log(
+                "save button click handler in toggleEditMode in showTodoDetails.js"
+            );
             // Save logic here
             fieldsToEdit.forEach((selector) => {
                 const field = document.querySelector(selector);

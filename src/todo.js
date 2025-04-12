@@ -96,6 +96,26 @@ export class Todo {
     }
 }
 
+export function createTodo(
+    title,
+    description,
+    dueDate,
+    priority,
+    notes,
+    isCompleted,
+    tags
+) {
+    return new Todo(
+        title,
+        description,
+        dueDate,
+        priority,
+        notes,
+        isCompleted,
+        tags
+    );
+}
+
 /**
  * Toggles the completed status of a todo item and updates the UI
  * @param {Event} e - The event object
