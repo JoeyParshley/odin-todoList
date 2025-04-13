@@ -5,6 +5,19 @@
 This section is used to track the work done on this project. I started it when I was mostyly finished with the UI. It is in reverse chornologocal order and its purpose is to track my work and thoughts so
 i can track my work an thoughts.
 
+#### 12APR2025
+
+-   [ ] Create Tags object in Local Storage
+-   [ ] Add Checklists to todos
+-   [ ] Add type ahead control to add Tag to Todo details Tags list
+-   [ ] Add hover control to remove Tag from Todo details Tags list
+-   [ ] Add date selector for due date
+-   [ ] Add selector for priority
+-   [ ] Add way to save Tags to Local storage as their own entity
+-   [ ] Consolidate Edit/add todo details code is in two places (index and showTodoDetails)
+
+---
+
 #### 11APR2025
 
 -   [x] Implement Add Project Button
