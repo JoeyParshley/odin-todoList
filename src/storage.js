@@ -28,7 +28,7 @@ export class Storage {
         const projects = Storage.getProjects();
         const parsedProjects = JSON.parse(projects);
         return parsedProjects.find((project) => {
-            return project.id === parseInt(id, 10);
+            return project.id === id;
         });
     }
 

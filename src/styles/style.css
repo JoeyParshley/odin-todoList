@@ -292,3 +292,64 @@ h4 {
     .settings {
     }
 }
+
+.backdrop {
+    display: grid;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    .modal {
+        display: grid;
+        grid-template-rows: 1fr, auto, 1fr;
+        padding: 20px;
+        border-radius: 20px;
+        background-color: #fff;
+        width: 400px;
+        height: 300px;
+        place-self: center;
+        .modal-header {
+            display: grid;
+            justify-content: center;
+        }
+        .modal-body {
+            .form-list {
+                color: rebeccapurple;
+                display: grid;
+                gap: 10px;
+                input {
+                    padding: 10px;
+                    border-radius: 10px;
+                }
+            }
+        }
+        .modal-footer {
+            .button-wrapper {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                button {
+                    background: rebeccapurple;
+                    color: white;
+                    border-radius: 10px;
+                    border: none;
+                    padding: 10px 20px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    &:hover {
+                        background: rgba(102, 51, 153, 0.75);
+                    }
+                }
+                .cancel-button {
+                    background: transparent;
+                    color: rebeccapurple;
+                    border: solid 1px rebeccapurple;
+                }
+            }
+        }
+    }
+}

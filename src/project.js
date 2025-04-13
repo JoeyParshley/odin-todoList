@@ -5,13 +5,14 @@ import { buildTodoList } from "./buildTodoList";
 import { fi } from "date-fns/locale";
 
 export class Project {
-    constructor(name, todos = []) {
-        this.name = name;
+    constructor(projectName, todos = []) {
+        this.projectName = projectName;
         this.todos = todos;
+        this.id = generateId();
     }
 
     getName() {
-        return this.name;
+        return this.projectName;
     }
 
     getTodos() {
@@ -19,7 +20,7 @@ export class Project {
     }
 
     setName(name) {
-        this.name = name;
+        this.projectName = name;
     }
 
     setTodos(newTodos) {
@@ -42,8 +43,84 @@ export class Project {
     }
 }
 
+function generateId() {
+    const timestamp = Date.now().toString(36);
+    const randomString = Math.random().toString(36).substring(2, 5);
+    return `${timestamp}-${randomString}`;
+}
+
 document.querySelector("#add-project").addEventListener("click", (e) => {
-    console.log("Add project button clicked");
+    // create modal to add a new project
+    // Create backdrop element
+    const container = document.querySelector(".container");
+    // create modal backdrop
+    const backdrop = document.createElement("div");
+    backdrop.classList.add("backdrop");
+    // create modal container
+    const modalContainer = document.createElement("div");
+    modalContainer.classList.add("modal");
+    // create modal header
+    const modalHeader = document.createElement("div");
+    const modalHeaderH3 = document.createElement("h3");
+    modalHeaderH3.textContent = "Add New Project";
+    modalHeader.classList.add("modal-header");
+    modalHeader.appendChild(modalHeaderH3);
+    // create modal body
+    const modalBody = document.createElement("div");
+    modalBody.classList.add("modal-body");
+    // create modal body elements
+    const formInputDiv = document.createElement("div");
+    formInputDiv.classList.add("form-list");
+    const projectNameInput = document.createElement("input");
+    const projectNameLabel = document.createElement("label");
+    projectNameLabel.textContent = "Project Name";
+    projectNameInput.setAttribute("type", "text");
+    projectNameInput.setAttribute("placeholder", "Enter project name");
+    projectNameInput.setAttribute("name", "project-name");
+    projectNameLabel.setAttribute("for", "project-name");
+    projectNameInput.setAttribute("placeholder", "Enter project name");
+    formInputDiv.appendChild(projectNameLabel);
+    formInputDiv.appendChild(projectNameInput);
+    modalBody.appendChild(formInputDiv);
+    // create modal footer
+    const modalFooter = document.createElement("div");
+    modalFooter.classList.add("modal-footer");
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.classList.add("cancel-button");
+    cancelButton.addEventListener("click", () => {
+        backdrop.remove();
+        modalContainer.remove();
+    });
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.classList.add("save-button");
+    saveButton.addEventListener("click", () => {
+        const projectName = projectNameInput.value.trim();
+        if (projectName) {
+            const newProject = new Project(projectName);
+            try {
+                allProjects.push(newProject);
+                Storage.saveProjects(JSON.stringify(allProjects));
+                console.log(`New project added: ${projectName}`);
+            } catch (error) {
+                console.error("Error adding new project:", error);
+            }
+            backdrop.remove();
+            modalContainer.remove();
+            addProjectToProjectList(newProject);
+        }
+    });
+    const buttonWrapperDiv = document.createElement("div");
+    buttonWrapperDiv.classList.add("button-wrapper");
+    buttonWrapperDiv.appendChild(cancelButton);
+    buttonWrapperDiv.appendChild(saveButton);
+    modalFooter.appendChild(buttonWrapperDiv);
+    modalContainer.appendChild(modalHeader);
+    modalContainer.appendChild(modalBody);
+    modalContainer.appendChild(modalFooter);
+    backdrop.appendChild(modalContainer);
+    container.appendChild(backdrop);
 });
 
 document.querySelector("#add-tag").addEventListener("click", (e) => {
@@ -130,6 +207,19 @@ export function buildProjectsByTag(e) {
         });
         target.classList.add("active");
     }
+}
+
+export function addProjectToProjectList(project) {
+    const projectList = document.querySelector(".project-list");
+    // create a new li element
+    const projectListItem = document.createElement("li");
+    // create a new a element
+    const projectListItemLink = document.createElement("a");
+    projectListItemLink.setAttribute("data-project-id", project.id);
+    projectListItemLink.href = "#";
+    projectListItemLink.textContent = project.projectName;
+    projectListItem.appendChild(projectListItemLink);
+    projectList.appendChild(projectListItem);
 }
 
 /**

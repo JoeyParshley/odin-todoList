@@ -16,11 +16,29 @@ function seedLocalStorageWithProjects() {
     Storage.saveProjects(projectsJSON);
 }
 
-export const allProjects = JSON.parse(Storage.getProjects());
-
+export const allProjects = (() => {
+    const storedProjects = Storage.getProjects();
+    // Check if the storage is empty or if it doesn't contain valid JSON.
+    if (
+        !storedProjects ||
+        typeof storedProjects !== "string" ||
+        storedProjects.trim() === ""
+    ) {
+        return []; // Return an empty array if no projects are found.
+    } else {
+        try {
+            return JSON.parse(storedProjects);
+        } catch (e) {
+            console.error("Error parsing JSON from storage:", e);
+            return []; // Return an empty array on JSON parsing failure
+        }
+    }
+})();
 // seed the local storage with the projects
 // this is only when the projects array in projects.js is modified
 // seedLocalStorageWithProjects();
+
+// console.log("allProjects", allProjects);
 
 setUpTodoFilters();
 // build the project list
