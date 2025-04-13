@@ -7,12 +7,12 @@ i can track my work an thoughts.
 
 #### 11APR2025
 
--   [ ] Implement Add Project Button
+-   [x] Implement Add Project Button
 -   [ ] Implement Add Tag project
 -   [ ] Create Tags object in Local Storage
--   [ ] Add type ahead contol to add Tag to Todo details Tags list
+-   [ ] Add type ahead control to add Tag to Todo details Tags list
 -   [ ] Add hover control to remove Tag from Todo details Tags list
--   [ ] Implement functionality to create a new project
+-   [x] Implement functionality to create a new project
 -   [ ] Add date selector for due date
 -   [ ] Add selector for priority
 -   [ ] Add way to save Tags to Local storage as their own entity
