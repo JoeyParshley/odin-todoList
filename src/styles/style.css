@@ -204,6 +204,9 @@ h4 {
                             .detail-priority {
                                 grid-column: 1 / 3;
                             }
+                            .date-picker {
+                                color: rebeccapurple;
+                            }
                             .tags {
                                 h4 {
                                     margin-bottom: 10px;
