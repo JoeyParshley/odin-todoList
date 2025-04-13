@@ -1,3 +1,4 @@
+import { generateId } from "./generateId.js";
 import { tagManager } from "./tagManager.js";
 import { toggleTodoCompletion } from "./toggleTodoCompletion.js";
 
@@ -11,6 +12,7 @@ export class Todo {
         isCompleted,
         tags = []
     ) {
+        this.id = generateId();
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;

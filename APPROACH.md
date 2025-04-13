@@ -8,8 +8,8 @@ i can track my work an thoughts.
 #### 11APR2025
 
 -   [x] Implement Add Project Button
--   [ ] Implement Add Tag project
 -   [ ] Create Tags object in Local Storage
+-   [ ] Add Checklists to todos
 -   [ ] Add type ahead control to add Tag to Todo details Tags list
 -   [ ] Add hover control to remove Tag from Todo details Tags list
 -   [x] Implement functionality to create a new project

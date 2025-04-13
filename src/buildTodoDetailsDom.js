@@ -17,7 +17,7 @@ export function buildTodoDetailsDom(e, project) {
         });
         target.classList.add("active");
         const currentTodo = project.todos.find((todo) => {
-            return todo.id === parseInt(todoId, 10);
+            return todo.id === todoId;
         });
         showTodoDetails(currentTodo, project);
     }

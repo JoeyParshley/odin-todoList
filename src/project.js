@@ -3,6 +3,8 @@ import { Storage } from "./storage";
 import { hideTodoDetails } from "./hideTodoDetails";
 import { buildTodoList } from "./buildTodoList";
 import { fi } from "date-fns/locale";
+import { generateId } from "./generateId";
+import { Todo } from "./todo";
 
 export class Project {
     constructor(projectName, todos = []) {
@@ -41,12 +43,6 @@ export class Project {
         );
         newProject.todos.push(todoToMove);
     }
-}
-
-function generateId() {
-    const timestamp = Date.now().toString(36);
-    const randomString = Math.random().toString(36).substring(2, 5);
-    return `${timestamp}-${randomString}`;
 }
 
 document.querySelector("#add-project").addEventListener("click", (e) => {
@@ -403,16 +399,15 @@ export function showProjectDetails(project) {
             const newTodoNotes =
                 document.querySelector("#detail-notes").textContent;
             const newTodoTags = [];
-            // create a new todo object
-            const newTodo = {
-                title: newTodoTitle,
-                description: newTodoDescription,
-                dueDate: newTodoDueDate,
-                priority: newTodoPriority,
-                notes: newTodoNotes,
-                tags: newTodoTags,
-            };
-
+            const newTodo = new Todo(
+                newTodoTitle,
+                newTodoDescription,
+                newTodoDueDate,
+                newTodoPriority,
+                newTodoNotes,
+                false,
+                newTodoTags
+            );
             // add todo to the UI
             buildTodoList(project);
             // Add new todo to the project
