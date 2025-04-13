@@ -49,6 +49,7 @@ export const buildMyDayTodosList = () => {
                 }
                 todoListItemLink.href = "#";
                 todoListItemLink.classList.add("todo-title");
+                todoListItemLink.setAttribute("title", todo.title);
                 todoListItemLink.setAttribute("data-todo-id", todo.id);
                 todoListItemLink.setAttribute("data-project-id", project.id);
                 todoListItemLink.textContent = todo.title;
