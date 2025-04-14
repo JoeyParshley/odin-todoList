@@ -7,7 +7,7 @@ i can track my work an thoughts.
 
 #### 12APR2025
 
--   [ ] Create Tags object in Local Storage
+-   [x] Create Tags object in Local Storage
 -   [ ] Add Checklists to todos
 -   [ ] Add type ahead control to add Tag to Todo details Tags list
 -   [ ] Add hover control to remove Tag from Todo details Tags list
@@ -16,6 +16,11 @@ i can track my work an thoughts.
 -   [ ] Add selector for priority
 -   [ ] Add way to save Tags to Local storage as their own entity
 -   [ ] Consolidate Edit/add todo details code is in two places (index and showTodoDetails)
+-   [ ] Set date picker to readonly
+-   [ ] Sort todos list by priority and due date
+-   [ ] set date selector color to purple
+-   [ ] Add mui
+-   [ ] Set todo form to non editable when save
 
 ---
 
