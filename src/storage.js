@@ -19,6 +19,35 @@ export class Storage {
         localStorage.setItem("projects", JSON.stringify(projects));
     }
 
+    static saveTags(tags) {
+        localStorage.setItem("tags", JSON.stringify(tags));
+    }
+
+    static getTags() {
+        const tagsJSON = localStorage.getItem("tags");
+        return tagsJSON ? JSON.parse(tagsJSON) : [];
+    }
+
+    static getTagByName(name) {
+        const tags = Storage.getTags();
+        return tags.find((tag) => {
+            return tag.name === name;
+        });
+    }
+
+    static deleteTag(tag) {
+        const tags = Storage.getTags();
+        const updatedTags = tags.filter((tag) => tag.id !== tag.id);
+        Storage.saveTags(updatedTags);
+    }
+
+    static getTagById(id) {
+        const tags = Storage.getTags();
+        return tags.find((tag) => {
+            return tag.id === id;
+        });
+    }
+
     static getProjects() {
         const projectsJSON = localStorage.getItem("projects");
         return projectsJSON ? JSON.parse(projectsJSON) : [];

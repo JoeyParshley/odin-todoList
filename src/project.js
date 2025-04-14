@@ -5,6 +5,8 @@ import { buildTodoList } from "./buildTodoList";
 import { fi } from "date-fns/locale";
 import { generateId } from "./generateId";
 import { Todo } from "./todo";
+import { tagManager } from "./tagManager";
+import { add } from "date-fns";
 
 export class Project {
     constructor(projectName, todos = []) {
@@ -71,7 +73,6 @@ document.querySelector("#add-project").addEventListener("click", (e) => {
     const projectNameLabel = document.createElement("label");
     projectNameLabel.textContent = "Project Name";
     projectNameInput.setAttribute("type", "text");
-    projectNameInput.setAttribute("placeholder", "Enter project name");
     projectNameInput.setAttribute("name", "project-name");
     projectNameLabel.setAttribute("for", "project-name");
     projectNameInput.setAttribute("placeholder", "Enter project name");
@@ -120,8 +121,89 @@ document.querySelector("#add-project").addEventListener("click", (e) => {
 });
 
 document.querySelector("#add-tag").addEventListener("click", (e) => {
-    console.log("Add tag button clicked");
+    // create modal to add a new tag
+    // create backdrop element
+    const container = document.querySelector(".container");
+    // create modal backdrop
+    const backdrop = document.createElement("div");
+    backdrop.classList.add("backdrop");
+    // create modal container
+    const modalContainer = document.createElement("div");
+    modalContainer.classList.add("modal");
+    // create modal header
+    const modalHeader = document.createElement("div");
+    const modalHeaderH3 = document.createElement("h3");
+    modalHeaderH3.textContent = "Add New Tag";
+    modalHeader.classList.add("modal-header");
+    modalHeader.appendChild(modalHeaderH3);
+    // create modal body
+    const modalBody = document.createElement("div");
+    modalBody.classList.add("modal-body");
+    // create modal body elements
+    const formInputDiv = document.createElement("div");
+    formInputDiv.classList.add("form-list");
+    const tagInput = document.createElement("input");
+    const tagLabel = document.createElement("label");
+    tagLabel.textContent = "Tag Name";
+    tagInput.setAttribute("type", "text");
+    tagInput.setAttribute("placeholder", "Enter tag name");
+    tagInput.setAttribute("name", "tag-name");
+    tagLabel.setAttribute("for", "tag-name");
+    formInputDiv.appendChild(tagLabel);
+    formInputDiv.appendChild(tagInput);
+    modalBody.appendChild(formInputDiv);
+    // create modal footer
+    const modalFooter = document.createElement("div");
+    modalFooter.classList.add("modal-footer");
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.classList.add("cancel-button");
+    cancelButton.addEventListener("click", () => {
+        backdrop.remove();
+        modalContainer.remove();
+    });
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.classList.add("save-button");
+    saveButton.addEventListener("click", () => {
+        const tagName = tagInput.value.trim();
+        let newTag = null;
+        if (tagName) {
+            try {
+                newTag = tagManager.createTag(tagName);
+                console.log(`New tag added: ${tagName}`);
+            } catch (error) {
+                console.error("Error adding new tag:", error);
+            }
+            backdrop.remove();
+            modalContainer.remove();
+            addTagToTagList(newTag);
+        }
+    });
+    const buttonWrapperDiv = document.createElement("div");
+    buttonWrapperDiv.classList.add("button-wrapper");
+    buttonWrapperDiv.appendChild(cancelButton);
+    buttonWrapperDiv.appendChild(saveButton);
+    modalFooter.appendChild(buttonWrapperDiv);
+    modalContainer.appendChild(modalHeader);
+    modalContainer.appendChild(modalBody);
+    modalContainer.appendChild(modalFooter);
+    backdrop.appendChild(modalContainer);
+    container.appendChild(backdrop);
 });
+
+export function addTagToTagList(tag) {
+    const tagList = document.querySelector("#tag-list");
+    // create a new li element
+    const tagListItem = document.createElement("li");
+    // create a new a tag
+    const tagListItemLink = document.createElement("a");
+    tagListItemLink.setAttribute("data-tag-id", tag.id);
+    tagListItemLink.href = "#";
+    tagListItemLink.textContent = tag.name;
+    tagListItem.appendChild(tagListItemLink);
+    tagList.appendChild(tagListItem);
+}
 
 /**
  * @param {*} e

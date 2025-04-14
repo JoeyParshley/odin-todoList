@@ -1,5 +1,4 @@
 import { generateId } from "./generateId.js";
-import { tagManager } from "./tagManager.js";
 import { toggleTodoCompletion } from "./toggleTodoCompletion.js";
 
 export class Todo {
@@ -79,7 +78,6 @@ export class Todo {
     addTag(tag) {
         if (!this.tags.includes(tag)) {
             this.tags.push(tag);
-            tagManager.addTag(tag);
         }
     }
 
@@ -96,26 +94,6 @@ export class Todo {
     save() {
         localStorage.setItem(this.title, JSON.stringify(this));
     }
-}
-
-export function createTodo(
-    title,
-    description,
-    dueDate,
-    priority,
-    notes,
-    isCompleted,
-    tags
-) {
-    return new Todo(
-        title,
-        description,
-        dueDate,
-        priority,
-        notes,
-        isCompleted,
-        tags
-    );
 }
 
 /**

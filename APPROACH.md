@@ -11,7 +11,8 @@ i can track my work an thoughts.
 -   [ ] Add Checklists to todos
 -   [ ] Add type ahead control to add Tag to Todo details Tags list
 -   [ ] Add hover control to remove Tag from Todo details Tags list
--   [ ] Add date selector for due date
+-   [x] Add date selector for due date
+-   [ ] Set calendar in selector to purple
 -   [ ] Add selector for priority
 -   [ ] Add way to save Tags to Local storage as their own entity
 -   [ ] Consolidate Edit/add todo details code is in two places (index and showTodoDetails)
