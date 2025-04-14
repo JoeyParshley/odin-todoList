@@ -12,15 +12,17 @@ i can track my work an thoughts.
 -   [ ] Add type ahead control to add Tag to Todo details Tags list
 -   [ ] Add hover control to remove Tag from Todo details Tags list
 -   [x] Add date selector for due date
--   [ ] Set calendar in selector to purple
 -   [ ] Add selector for priority
 -   [ ] Add way to save Tags to Local storage as their own entity
 -   [ ] Consolidate Edit/add todo details code is in two places (index and showTodoDetails)
 -   [ ] Set date picker to readonly
 -   [ ] Sort todos list by priority and due date
--   [ ] set date selector color to purple
+-   [ ] set date selector calendar color to purple
 -   [ ] Add mui
 -   [ ] Set todo form to non editable when save
+-   [ ] Implement project edit flow
+-   [ ] Implement todo edit flow
+-   [ ] Implement tag edit flow
 
 ---
 

@@ -358,3 +358,7 @@ h4 {
         }
     }
 }
+#todos-wrapper .todo-list {
+    height: 570px;
+    overflow: scroll;
+}
