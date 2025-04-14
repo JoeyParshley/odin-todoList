@@ -353,17 +353,18 @@ export function getAllTagsFromProjects() {
  * buildTagList();
  */
 export function buildTagList() {
-    const allTags = getAllTagsFromProjects();
-    const tagList = document.querySelector(".tag-list");
+    const allTags = Storage.getTags();
+    const tagList = document.querySelector("#tag-list");
     allTags.forEach((tag) => {
         const tagListLi = document.createElement("li");
         const tagListLink = document.createElement("a");
         tagListLink.href = "#";
-        tagListLink.setAttribute("id", tag);
+        tagListLink.setAttribute("id", tag.id);
         tagListLink.classList.add("tag-list-item");
-        tagListLink.textContent = tag;
+        tagListLink.textContent = tag.name;
         tagListLi.appendChild(tagListLink);
-        tagList.addEventListener("click", buildProjectsByTag);
+        // tagList.addEventListener("click", buildProjectsByTag);
+        // TODO: When clicking the tag in the tag list, it should filter the projects by that tag and display them as a list.
         tagList.appendChild(tagListLi);
     });
 }
